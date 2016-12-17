@@ -22,6 +22,24 @@ public class User {
     private int state; // 是否激活
     private String activecode; // 激活码 UUID获取
     private Timestamp updatetime; // 更新时间
+    private String QQ;
+    private String phone;
+
+    public String getQQ() {
+        return QQ;
+    }
+
+    public void setQQ(String QQ) {
+        this.QQ = QQ;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public int getId() {
         return id;

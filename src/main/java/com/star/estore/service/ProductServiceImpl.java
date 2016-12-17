@@ -15,6 +15,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void add(User user, Product product) throws PrivilegeException, Exception {
         ProductDao dao = new ProductDao();
+        product.setOwner(user.getId());
         dao.addProduct(product);
     }
 //查找所有商品

@@ -17,6 +17,52 @@ public class Product implements Serializable {
     // 在获取销售榜单信息时使用
     private int totalSaleNum; // 总销售数量
 
+    private String dealps;
+    private boolean discount;
+    private String QQ;
+    private String phone;
+    private int owner;
+
+    public int getOwner() {
+        return owner;
+    }
+
+    public void setOwner(int owner) {
+        this.owner = owner;
+    }
+
+    public String getDealps() {
+        return dealps;
+    }
+
+    public void setDealps(String dealps) {
+        this.dealps = dealps;
+    }
+
+    public boolean isDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(boolean discount) {
+        this.discount = discount;
+    }
+
+    public String getQQ() {
+        return QQ;
+    }
+
+    public void setQQ(String QQ) {
+        this.QQ = QQ;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getId() {
         return id;
     }

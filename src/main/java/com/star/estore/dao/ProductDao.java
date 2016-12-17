@@ -3,6 +3,7 @@ package com.star.estore.dao;
 import com.star.estore.domain.Order;
 import com.star.estore.domain.OrderItem;
 import com.star.estore.domain.Product;
+import com.star.estore.domain.User;
 import com.star.estore.utils.DataSourceUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -17,9 +18,10 @@ import java.util.List;
 public class ProductDao {
     public void addProduct(Product p) throws SQLException {
         QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-        String sql = "insert into products values(?,?,?,?,?,?,?)";
+        String sql = "insert into products values(?,?,?,?,?,?,?,?,?,?,?,?)";
         runner.update(sql,p.getId(),p.getName(),p.getPrice(),p.getCategory(),
-                p.getPnum(),p.getImgurl(),p.getDescription());
+                p.getPnum(),p.getImgurl(),p.getDescription(),p.getDealps(),
+                p.isDiscount(),p.getQQ(),p.getPhone(), p.getOwner());
     }
 
     public List<Product> findAll() throws SQLException {

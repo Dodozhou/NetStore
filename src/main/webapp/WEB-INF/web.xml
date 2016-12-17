@@ -115,6 +115,16 @@
     <url-pattern>/appuser</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>PurchaseServlet</servlet-name>
+    <servlet-class>com.star.estore.web.servlet.PurchaseServlet</servlet-class>
+    <description>这是求购处理的servlet</description>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PurchaseServlet</servlet-name>
+    <url-pattern>/pur</url-pattern>
+  </servlet-mapping>
+
   <welcome-file-list>
     <welcome-file>page.jsp</welcome-file>
   </welcome-file-list>

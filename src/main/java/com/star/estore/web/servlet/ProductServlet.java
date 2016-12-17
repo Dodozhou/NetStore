@@ -1,9 +1,12 @@
 package com.star.estore.web.servlet;
 
 import com.google.gson.Gson;
+import com.star.estore.dao.UserDao;
 import com.star.estore.domain.Product;
+import com.star.estore.domain.User;
 import com.star.estore.factory.ProductServiceFactory;
 import com.star.estore.service.ProductService;
+import com.star.estore.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,10 +41,17 @@ public class ProductServlet extends HttpServlet {
 		try {
 			ProductService service = ProductServiceFactory.getInstance();
 			Product p = service.findById(id);
-
+			int owner_id=p.getOwner();
+			UserDao dao=new UserDao();
+			User owner=dao.findUserById(owner_id);
+			if (owner==null){
+				response.getWriter().write("非常抱歉，根据id查找该商品的拥有者失败！");
+				return;
+			}
 			request.setAttribute("p", p);
+			request.setAttribute("owner",owner);
 
-			request.getRequestDispatcher("/productInfo.jsp").forward(request,
+			request.getRequestDispatcher("/goods_details.jsp").forward(request,
 					response);
 
 		} catch (SQLException e) {

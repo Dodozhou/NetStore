@@ -109,7 +109,7 @@ public class AddProductServlet extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             try {
                 service.add(user,product);
-                response.sendRedirect(request.getContextPath()+"/index.jsp");
+                response.sendRedirect(request.getContextPath()+"/publish.jsp");
             } catch (Exception e) {
                 e.printStackTrace();
             }

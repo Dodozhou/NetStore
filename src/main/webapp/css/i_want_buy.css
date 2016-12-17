@@ -1,0 +1,122 @@
+.tit
+{
+    margin:40px 0;
+    text-align:center ;
+}
+.tit img
+{
+    width: 100px;
+    max-width:100%;
+    /*min-width: 10%;*/
+    vertical-align: bottom;
+}
+.tit span
+{
+    font-size: xx-large;
+    color: rgb(43,76,126);
+    font-weight: 600;
+    font-family:华文新魏;
+}
+.formmain{
+    box-shadow: 0 0 10px 10px #eee;
+    /*border:1px solid #000;*/
+    margin: 20px;
+    padding-top:40px;
+}
+.table form .span,.tishi{
+    height:40px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: right;
+}
+#textarea .span{
+    height:100px;
+    line-height: 100px;
+    font-size: 16px;
+    text-align: right;
+}
+.table form .span span,#textarea .span span{
+    font-size: 16px;
+}
+.tishi{
+    text-align: left;
+}
+.tishi #tishi{
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.8);
+}
+input{
+    background-color: rgb(246,249,249);
+    padding: 0 5px;
+    border:1px solid rgba(103, 139, 51, 0.23);
+    height:40px;
+    border-radius: 8px;
+    -moz-border-radius:25px; /* 老的 Firefox */
+    margin-bottom: 10px;
+}
+.input1{
+    width:80%;
+}
+.input2{
+    width:40%;
+}
+textarea{
+    height:100px;
+    border:1px solid rgba(103, 139, 51, 0.23);
+    background-color: rgb(246,249,249);
+    margin-bottom: 10px;
+    border-radius: 8px;
+    -moz-border-radius:25px; /* 老的 Firefox */
+}
+.submit{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.submit button{
+    /*padding: 15px 60px;*/
+    padding: 2% 8%;
+    background-color:rgb(86,126,187);
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    color: #FFF;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    outline: none; /*去掉button被点击时的边框*/
+    border: 1px solid #fff;
+}
+.submit button:hover{
+    color: rgb(43,76,126);
+    background-color: #fff;
+    border: 1px solid rgb(43,76,126);
+}
+@media screen and (max-width: 768px){
+    .table form .span,#textarea .span{
+        text-align: left;
+        height:40px;
+        line-height: 40px;
+    }
+    .input2{
+        width:60%;
+    }
+}
+@media screen and (max-width: 460px){
+    .formmain{
+        margin:0;
+    }
+    .tit  {
+        margin: 5px 0;
+    }
+    .tit img {
+        width:50px;
+    }
+    .tit span
+    {
+        font-size: medium;
+    }
+    .input1,.input2{
+        width:90%;
+    }
+}

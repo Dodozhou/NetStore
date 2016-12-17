@@ -71,4 +71,17 @@ public class UserDao {
         String sql = "select * from users where activecode=?";
         return runner.query(sql,new BeanHandler<User>(User.class),activecode);
     }
+
+    public User findUserById(int id) {
+        QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
+        String sql="select * from users where id=?";
+        User user=null;
+        try {
+            user=runner.query(sql,new BeanHandler<User>(User.class),id);
+        } catch (SQLException e) {
+System.out.println("根据id查找用户失败，可能是id不存在");
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

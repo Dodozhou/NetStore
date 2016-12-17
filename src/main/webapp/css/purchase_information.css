@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+}
+
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+    width: 100%;
+}
+
+@media only screen and (min-width: 320px) {
+    /* For tablets: */
+    .col-s-1 {width: 8.33%;}
+    .col-s-2 {width: 16.66%;}
+    .col-s-3 {width: 25%;}
+    .col-s-4 {width: 33.33%;}
+    .col-s-5 {width: 41.66%;}
+    .col-s-6 {width: 50%;}
+    .col-s-7 {width: 58.33%;}
+    .col-s-8 {width: 66.66%;}
+    .col-s-9 {width: 75%;}
+    .col-s-10 {width: 83.33%;}
+    .col-s-11 {width: 91.66%;}
+    .col-s-12 {width: 100%;}
+}
+
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+    .col-m-1 {width: 8.33%;}
+    .col-m-2 {width: 16.66%;}
+    .col-m-3 {width: 25%;}
+    .col-m-4 {width: 33.33%;}
+    .col-m-5 {width: 41.66%;}
+    .col-m-6 {width: 50%;}
+    .col-m-7 {width: 58.33%;}
+    .col-m-8 {width: 66.66%;}
+    .col-m-9 {width: 75%;}
+    .col-m-10 {width: 83.33%;}
+    .col-m-11 {width: 91.66%;}
+    .col-m-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+}
+
+html{
+	overflow-x: hidden;
+}
+
+body{
+	font-family: "微软雅黑";
+	margin: 0;
+	background-color: ;
+}
+
+/*----------------------------------start .main-----------------------------------------------*/
+.main{
+	width: 80%;
+	margin: auto;
+}
+
+.wantbuy{
+	padding: 40px;
+	margin: 30px auto;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	cursor: pointer;
+}
+
+.wantbuy h2{
+	color: #428BFF;
+}
+
+.wantbuy:hover{
+	transform: scale(1.02);
+}
+
+.wantbuy a{
+	color: #000000;
+	text-decoration: none;
+}
+
+.wantbuy a:hover{
+	color: #428BFF;
+}
+
+.pubdate{
+	font-size: 12px;
+	color: gray;
+}
+
+.main h1{
+	text-align: center;
+	letter-spacing: 5px;
+}
+
+.main hr{
+	width: 30%;
+	height: 3px;
+	border: none;
+	border-top: 3px solid #428BFF;
+}
+
+.footer{
+	padding: 40px 15px;
+	font-size: 14px;
+	text-align: center;
+	margin-top: 30px;
+	background-color: rgb(43,76,126);
+	color: white;
+}
+
+.footer a{
+	text-decoration: none;
+	color: white;
+	margin: 0 20px;
+}
+
+.footer a:hover{
+	color: #428BFF;
+}

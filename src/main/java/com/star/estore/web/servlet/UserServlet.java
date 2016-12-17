@@ -55,12 +55,12 @@ public class UserServlet extends HttpServlet {
         } catch (RegistException e) {
             e.printStackTrace();
             response.getWriter().write(e.getMessage()+"," +
-                    "重新<a href="+request.getContextPath()+"/regist.jsp>注册</a>");
+                    "重新<a href="+request.getContextPath()+"/page.jsp>注册</a>");
             return;
         }catch (ActiveUserException e){
             e.printStackTrace();
             response.getWriter().write(e.getMessage()+",重新<a href='" + request.getContextPath()
-                    + "/regist.jsp'>注册</a>");
+                    + "//page.jsp'>注册</a>");
             return;
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ public class UserServlet extends HttpServlet {
         //判断客户端提交的验证码和后台生成的验证码是否一致，不是，则提示注册失败，重定向回注册页面
         if (_checkcode == null || (!_checkcode.equals(checkcode))){
             request.setAttribute("regist.message","验证码不正确");
-            request.getRequestDispatcher("/regist.jsp").forward(request,response);
+            request.getRequestDispatcher("/page.jsp").forward(request,response);
             return;
         }
         User user=new User();
@@ -159,7 +159,7 @@ public class UserServlet extends HttpServlet {
         if (map.size()>0){
             //说明有错误信息
             request.setAttribute("map",map);
-            request.getRequestDispatcher("/regist.jsp").forward(request,response);
+            request.getRequestDispatcher("/page.jsp").forward(request,response);
             return;
         }
         //手动封装一个激活码
@@ -172,7 +172,7 @@ public class UserServlet extends HttpServlet {
             response.getWriter().write("恭喜您注册成功，请前往您的邮箱激活账户！");
         } catch (RegistException e) {
             request.setAttribute("regist.message",e.getMessage());
-            request.getRequestDispatcher("/regist.jsp").forward(request,response);
+            request.getRequestDispatcher("/page.jsp").forward(request,response);
             e.printStackTrace();
         }
 

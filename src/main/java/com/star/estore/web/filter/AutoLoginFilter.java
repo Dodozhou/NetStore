@@ -33,8 +33,8 @@ public class AutoLoginFilter implements Filter {
 			String contextPath = req.getContextPath();
 			String path = uri.substring(contextPath.length());
 
-			if (!("/regist.jsp".equalsIgnoreCase(path)
-					|| "/login".equalsIgnoreCase(path) || "/regist"
+			if (!("/page.jsp".equalsIgnoreCase(path)
+					|| "/login".equalsIgnoreCase(path) || "/page"
 						.equalsIgnoreCase(path))) {
 				// 符合条件的是可以进行自动登录操作的.
 
