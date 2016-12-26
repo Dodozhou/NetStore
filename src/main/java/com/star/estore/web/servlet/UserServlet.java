@@ -27,6 +27,7 @@ public class UserServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         //得到请求参数method，判断当前是什么操作
         //String method1=request.getMethod(); 这是错误的写法，得到的结果是POST
+        request.setCharacterEncoding("utf-8");
         String method=request.getParameter("method");
 //        System.out.println(method);
 //        System.out.println(method.equals("regist"));  调试输出语句

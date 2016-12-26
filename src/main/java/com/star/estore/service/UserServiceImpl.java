@@ -22,11 +22,11 @@ public class UserServiceImpl implements UserService {
            /* String emailMsg="Regist success!Please click the <a href='http://localhost:8888/user?method=activeuser&activecode="
                     +user.getActivecode()+"'>active</a> to active your account,the active code is :"+user.getActivecode();*/
             //本地的测试消息
-            String emailMsg="注册成功，请在12小时内<a href='http://localhost:8888/user?method=activeuser&activecode="
-                    +user.getActivecode()+"'>激活</a>,激活码是"+user.getActivecode();
-            //云服务器的测试消息
-           /* String emailMsg="注册成功，请在12小时内<a href='http://www.deardull.com/BookStore/user?method=activeuser&activecode="
+           /* String emailMsg="注册成功，请在12小时内<a href='http://localhost:8888/user?method=activeuser&activecode="
                     +user.getActivecode()+"'>激活</a>,激活码是"+user.getActivecode();*/
+            //云服务器的测试消息
+            String emailMsg="注册成功，请在12小时内<a href='http://www.deardull.com/BookStore/user?method=activeuser&activecode="
+                    +user.getActivecode()+"'>激活</a>,激活码是"+user.getActivecode();
             //调用方法发送邮件
             MailUtils.sendMail(user.getEmail(),emailMsg);
         } catch (SQLException e) {

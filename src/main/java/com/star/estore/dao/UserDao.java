@@ -21,11 +21,11 @@ public class UserDao {
         QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
         //2.执行sql语句
         //默认用户role=user state=0 代表未激活
-        String sql="insert into users values(null,?,?,?,?,'user',0,?,null);";
+        String sql="insert into users values(null,?,?,?,?,'admin',0,?,null,?,?);";
 
         try {
             runner.update(sql,user.getUsername(), Md5Utils.md5(user.getPassword()),
-                    user.getNickname(),user.getEmail(),user.getActivecode());
+                    user.getNickname(),user.getEmail(),user.getActivecode(),user.getPhone(),user.getQQ());
         } catch (SQLException e) {
             e.printStackTrace();
         }

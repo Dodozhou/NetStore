@@ -6,6 +6,7 @@ import com.star.estore.domain.Purchase;
 import com.star.estore.domain.User;
 import com.star.estore.exception.PrivilegeException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,12 +14,9 @@ import java.util.List;
  */
 public interface PurchaseService {
     //添加求购
-    public void add(User user, Purchase purchase) throws Exception;
+    void add(User user, Purchase purchase) throws Exception;
+    //查找前12条求购信息，在主页上循环播放
+    List<Purchase> find12() throws SQLException;
 
-    //查找求购信息
-    public List<Product> findAll() throws Exception;
-
-    //根据关键字查找求购信息
-    public Product findByInfo(String keyword) throws Exception;
-
-    }
+    List<Purchase> findAll() throws SQLException;
+}

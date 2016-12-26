@@ -29,38 +29,45 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 
 
 	<!--头部开始-->
-	<div id="header"  class="col-12 center " >
-		<div class="col-1">
-			<!--<img style="max-width: 100%;" src="images/logo.png">-->
+	<div  class="col-12 center header" >
+		<div class="col-2">
+			<small><a href="page.jsp"> <img src="images/return-homepage.png"/> 返回首页 </a></small>
 		</div>
-		<div class="col-3   col-4-n">
-			<img style="max-width:120px;display: inline;" src="images/logo.png">
-			<h1 >校园服务街</h1>
-			<p>最安全方便的校园服务平台</p>
+		<div class="col-3">
+			<img class="logo-img" src="images/logo.png">
+			<div class="logo-text">
+				<p  style="font-size: 30px;">校园服务街</p>
+				<p>最安全方便的校园服务平台</p>
+			</div>
 		</div>
 
 		<!--收索框-->
-		<div class="col-8  col-8-n">
+		<div class="col-5 ">
 			<div class="search-box">
-				<form action="" method="get" id="searchForm">
-					<input type="search" name="searchYour" placeholder="搜 你 所 想" class="search1"/>
-					<input type="submit" name="search" value="搜 索" class="search2"/>
+				<form action="${pageContext.request.contextPath}/product" method="post" id="searchForm">
+					<input type="hidden" name="method" value="findByKey">
+					<input type="search" name="key" placeholder="搜 你 所 想" class="search1"/>
+					<input type="submit" name="search" value=" " class="search2"/>
 				</form>
 			</div>
-			<div class="log-box">
+		</div>
+		<div class="col-2">
+			<div class="log-box ">
 				<span class="to_login">登录</span>
 				<span class="to_register">注册</span>
 			</div>
 		</div>
+
 		<div class="a登录注册框">
 			<!--登录开始-->
 			<div class="mask"></div>
 			<div class="log_box" id="log_box">
 				<span class="close"><img src="images/close.png"/></span>
 				<div class="log-main">
-					<form  method="post" id="loginForm" action="/BookStore/user">
-						<label> 用户</label><input  type="text" name="uername" id="uername"   autofocus REQUIRED/>
-						<label>密码</label><input  type="password" name="password" id="psw"   required/><br/>
+					<form  method="post" id="loginForm" action="${pageContext.request.contextPath}/user">
+						<input type="hidden" name="method" value="login">
+						<label for="uername"> 用户</label><input  type="text" name="username" id="uername"   autofocus REQUIRED/>
+						<label for="psw">密码</label><input  type="password" name="password" id="psw"   required/><br/>
 						<input type="checkbox" name="remember"  value="on" class="autologin"/><span>记住用户</span>
 						<input type="checkbox" name="autologin" value="on" class="autologin"/><span>自动登录</span><br />
 						<input type="submit" name="loginbtn"
@@ -76,15 +83,25 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 			<div class="register_box" id="register_box">
 				<span class="close"><img src="images/close.png"/></span>
 				<div class="register-main" >
-					<form id="registerForm" method="post" action=" " >
-						<input type="hidden" name="method" value="register">
-						<label>用户名</label><input  type="text" name="uername"  id="username"  required /><br/>
+					<form id="registerForm" method="post" action="${pageContext.request.contextPath }/user" >
+						<input type="hidden" name="method" value="regist">
+						<label>用户名</label><input  type="text" name="username"  id="username"  required /><br/>
 						<label>密码</label><input  type="password" name="password"  id="password" required  /><br/>
 						<label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onkeyup="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
 						<label>昵称</label><input  type="text"  name="nickname" id="nickname"   required/><br/>
 						<label> 邮箱</label> <input  type="email" name="email" id="email" required  title="email的格式是xxx@xxx.xx"/><br/>
 						<label>验证码</label><input  type="text" name="checkcode" id="code" class="ckeckcode" required/>
-						<input type="button" id="checked"  onclick="creatCode()" value="8TXK" required>
+						<img src='${pageContext.request.contextPath }/checkcode' id="im" onclick="change();">
+						<span id="checkcode_span">
+					<a href="javascript:void(0)" onclick="change();">
+					<font color='black'>看不清，换一张</font>
+					</a>
+					</span>
+						${requestScope["regist.message"] }
+						<br>
+						<c:forEach items="${map}" var="m">
+							${m.value }<br>
+						</c:forEach>
 						<input type="submit" id="submit"  class="register" value=" 注   册 " >
 						<input type="reset"  class="register" value=" 取   消 "><br/><br/>
 						<label> <a href="#" onclick="login()">去登录</a></label><br/>

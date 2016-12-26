@@ -1,5 +1,8 @@
 package com.star.estore.domain;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  * Created by hp on 2016/12/16.
  */
@@ -13,6 +16,15 @@ public class Purchase {
     private int owner;//求购信息发布者
     private String QQ;//联系方式
     private String phone;
+    private Timestamp update_time;
+
+    public Timestamp getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Timestamp update_time) {
+        this.update_time = update_time;
+    }
 
     public String getQQ() {
         return QQ;

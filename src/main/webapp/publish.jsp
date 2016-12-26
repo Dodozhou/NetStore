@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.star.estore.domain.User" %>
 <%@ taglib prefix="privilege" uri="http://www.itcast.cn/privilege"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,38 +28,45 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 
 
     <!--头部开始-->
-    <div id="header"  class="col-12 center " >
-        <div class="col-1">
-            <!--<img style="max-width: 100%;" src="images/logo.png">-->
+    <div  class="col-12 center header" >
+        <div class="col-2">
+            <small><a href="page.jsp"> <img src="images/return-homepage.png"/> 返回首页 </a></small>
         </div>
-        <div class="col-3   col-4-n">
-            <img style="max-width:120px;display: inline;" src="images/logo.png">
-            <h1 >校园服务街</h1>
-            <p>最安全方便的校园服务平台</p>
+        <div class="col-3">
+            <img class="logo-img" src="images/logo.png">
+            <div class="logo-text">
+                <p  style="font-size: 30px;">校园服务街</p>
+                <p>最安全方便的校园服务平台</p>
+            </div>
         </div>
 
         <!--收索框-->
-        <div class="col-8  col-8-n">
+        <div class="col-5 ">
             <div class="search-box">
-                <form action="" method="get" id="searchForm">
-                    <input type="search" name="searchYour" placeholder="搜 你 所 想" class="search1"/>
-                    <input type="submit" name="search" value="搜 索" class="search2"/>
+                <form action="${pageContext.request.contextPath}/product" method="post" id="searchForm">
+                    <input type="hidden" name="method" value="findByKey">
+                    <input type="search" name="key" placeholder="搜 你 所 想" class="search1"/>
+                    <input type="submit" name="search" value=" " class="search2"/>
                 </form>
             </div>
-            <div class="log-box">
+        </div>
+        <div class="col-2">
+            <div class="log-box ">
                 <span class="to_login">登录</span>
                 <span class="to_register">注册</span>
             </div>
         </div>
+
         <div class="a登录注册框">
             <!--登录开始-->
             <div class="mask"></div>
             <div class="log_box" id="log_box">
                 <span class="close"><img src="images/close.png"/></span>
                 <div class="log-main">
-                    <form  method="post" id="loginForm" action="/BookStore/user">
-                        <label> 用户</label><input  type="text" name="uername" id="uername"   autofocus REQUIRED/>
-                        <label>密码</label><input  type="password" name="password" id="psw"   required/><br/>
+                    <form  method="post" id="loginForm" action="${pageContext.request.contextPath}/user">
+                        <input type="hidden" name="method" value="login">
+                        <label for="uername"> 用户</label><input  type="text" name="username" id="uername"   autofocus REQUIRED/>
+                        <label for="psw">密码</label><input  type="password" name="password" id="psw"   required/><br/>
                         <input type="checkbox" name="remember"  value="on" class="autologin"/><span>记住用户</span>
                         <input type="checkbox" name="autologin" value="on" class="autologin"/><span>自动登录</span><br />
                         <input type="submit" name="loginbtn"
@@ -74,15 +82,25 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
             <div class="register_box" id="register_box">
                 <span class="close"><img src="images/close.png"/></span>
                 <div class="register-main" >
-                    <form id="registerForm" method="post" action=" " >
-                        <input type="hidden" name="method" value="register">
-                        <label>用户名</label><input  type="text" name="uername"  id="username"  required /><br/>
+                    <form id="registerForm" method="post" action="${pageContext.request.contextPath }/user" >
+                        <input type="hidden" name="method" value="regist">
+                        <label>用户名</label><input  type="text" name="username"  id="username"  required /><br/>
                         <label>密码</label><input  type="password" name="password"  id="password" required  /><br/>
                         <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onkeyup="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
                         <label>昵称</label><input  type="text"  name="nickname" id="nickname"   required/><br/>
                         <label> 邮箱</label> <input  type="email" name="email" id="email" required  title="email的格式是xxx@xxx.xx"/><br/>
                         <label>验证码</label><input  type="text" name="checkcode" id="code" class="ckeckcode" required/>
-                        <input type="button" id="checked"  onclick="creatCode()" value="8TXK" required>
+                        <img src='${pageContext.request.contextPath }/checkcode' id="im" onclick="change();">
+                        <span id="checkcode_span">
+					<a href="javascript:void(0)" onclick="change();">
+					<font color='black'>看不清，换一张</font>
+					</a>
+					</span>
+                        ${requestScope["regist.message"] }
+                        <br>
+                        <c:forEach items="${map}" var="m">
+                            ${m.value }<br>
+                        </c:forEach>
                         <input type="submit" id="submit"  class="register" value=" 注   册 " >
                         <input type="reset"  class="register" value=" 取   消 "><br/><br/>
                         <label> <a href="#" onclick="login()">去登录</a></label><br/>
@@ -109,26 +127,27 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         <div class="col-2 blank"></div>
         <div class="col-7 formmain">
             <div class="row3">
-                <div class="col-12 upload">
-                    <img src="images/upload.png"/>
-                </div>
                 <privilege:estore user="${user}"/>
                 <div class="col-12 table">
-                    <form name="form1" action="${pageContext.request.contextPath}/addProduct"
+                    <form id="publish" name="form1" action="${pageContext.request.contextPath}/addProduct"
                           method="post" enctype="multipart/form-data">
+                        <c:if test="${not empty pname}">
+                            <div align="center">
+                            <span style="color:red;" align="center">恭喜您，您的商品"${pname}"添加成功！</span>
+                            </div>
+                        </c:if>
+                        <div class="col-12 upload">
+                            <%--实现效果：点击图片出现file选择框--%>
+                            <label for="file_up" style="cursor: pointer"><img id="up_img" src="images/upload.png"/></label>
+                            <input type="file" name="img" id="file_up" form="publish" style="display: none;">
+                            <%--效果结束--%>
+                        </div>
                         <div class="col-3 span">
                             <span>商品名称</span>
                         </div>
                         <div class="col-9">
                             <input id="text1" name="name" onclick="document.getElementById('text1').style.backgroundColor='#fff'"
                                    class="input1" type="text" size="25" placeholder="少于25字" required/>
-                        </div>
-                        <div class="col-3 span">
-                            <span>商品图片</span>
-                        </div>
-                        <div class="col-9">
-                            <input id="tex"  name="f" onclick="document.getElementById('text1').style.backgroundColor='#fff'"
-                                   class="input1" type="file" size="25" required/>
                         </div>
                     <div id="textarea">
                         <div class="col-3 span">
@@ -173,8 +192,8 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                             <span>讲价</span>
                         </div>
                         <div class="col-9">
-                            <input class="jiangjia" type="radio" name="discount" value="可小刀"/>
-                            <input class="jiangjia" type="radio" name="discount" value="不可小刀"/>
+                            <input class="jiangjia" type="radio" name="discount" value="1"/>
+                            <input class="jiangjia" type="radio" name="discount" value="0"/>
                         </div>
                         <div class="col-3 span">
                                 <span>联系方式</span>
@@ -187,17 +206,17 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         </div>
                         <div class="col-9">
                             <span style="vertical-align:center"><%=u.getQQ()%></span>
-                            <input type="hidden" value="<%=u.getQQ()%>">
+                            <input type="hidden" name="QQ" value="<%=u.getQQ()%>">
                         </div>
                         <div class="col-3 span">
                             <span>手机号</span>
                         </div>
                         <div class="col-9">
                             <span><%=u.getPhone()%></span>
-                            <input type="hidden" value="<%=u.getPhone()%>">
+                            <input type="hidden"  name="phone" value="<%=u.getPhone()%>">
                         </div>
                         <div class="col-3 span radio" style="text-align: right">
-                            <input  type="radio"/>
+                            <input  type="radio" />
                         </div>
                         <div class="col-9 rule">
                             <span>我同意<a href="#">商品发布规则</a></span>
@@ -226,6 +245,16 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
     </div>
     <!--结尾结束-->
 </div>
+<script>
+    document.getElementById('file_up').onchange = function() {
+        var imgFile = this.files[0];
+        var fr = new FileReader();
+        fr.onload = function() {
+            document.getElementById('up_img').src = fr.result;
+        };
+        fr.readAsDataURL(imgFile);
+    };
+</script>
 
 <script type="text/javascript">
     //开始登陆,注册
@@ -266,6 +295,53 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         log_box.style.display = "block";
         mask.style.display = "block";
     }
+
+
+    //alert($);//弹出jq的代理函数$
+    var index = 0;//定义一个索引初始值
+    var $icons = $(".icon ul li");//用一个变量来存储li的地址
+    var $imgs = $(".imgs ul li");
+    var timer = null;
+    $(".banner .right").click(function(){//点击实现什么效果
+        index++;//index = index + 1
+        //$(".img ul li")选择到所有的li
+        //eq(index)选择到对应索引值的li
+        if(index>5)index=0;
+        play();
+    });
+    $(".banner .left").click(function(){//点击实现什么效果
+        index--;//index = index - 1
+        if(index<0)index=5;
+        play();
+    });
+
+    function play(){
+        $icons.eq(index).addClass("first").siblings().removeClass("first");
+        $imgs.eq(index).addClass("curr").siblings().removeClass("curr");
+    }
+    $icons.hover(function(){//鼠标移上去实现什么效果
+        index = $(this).index();//鼠标移动到谁上面就获谁的序列号
+        play();
+    });
+
+    $(".banner").hover(function(){//鼠标移上去实现什么效果
+        $(".banner .btn").show();//显示
+        clearInterval(timer);//清楚定时器
+    },function(){//鼠标移开实现什么效果
+        $(".banner .btn").hide();//隐藏
+        autoplay();
+    });
+
+    function autoplay(){
+        timer = setInterval(function(){
+            index++;
+            if(index>5)index=0;
+            play();
+        },2000);
+    }
+
+    autoplay();
+
 
 </script>
 </body>

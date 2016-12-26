@@ -6,6 +6,7 @@ import com.star.estore.domain.User;
 import com.star.estore.exception.PrivilegeException;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -25,4 +26,6 @@ public interface ProductService {
     //查询销售榜单
     @PrivilegeInfo("下载榜单")
     public List<Product> findSell(User user) throws PrivilegeException,Exception;
+
+    List<Product> findByKey(String key) throws SQLException;
 }

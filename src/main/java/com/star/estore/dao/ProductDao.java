@@ -5,6 +5,7 @@ import com.star.estore.domain.OrderItem;
 import com.star.estore.domain.Product;
 import com.star.estore.domain.User;
 import com.star.estore.utils.DataSourceUtils;
+import com.sun.mail.util.QEncoderStream;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ProductDao {
     public void addProduct(Product p) throws SQLException {
         QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-        String sql = "insert into products values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into products values(?,?,?,?,?,?,?,?,?,?,?,?,null)";
         runner.update(sql,p.getId(),p.getName(),p.getPrice(),p.getCategory(),
                 p.getPnum(),p.getImgurl(),p.getDescription(),p.getDealps(),
                 p.isDiscount(),p.getQQ(),p.getPhone(), p.getOwner());
@@ -91,4 +92,19 @@ public class ProductDao {
         // }
     }
 
+    public List<Product> findByKey(String key) throws SQLException {
+        QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
+        //构造模糊查询字符串，即每个关键字前后加上%
+        String key2="";
+        key=key.trim();
+        key=key.replaceAll("\\s+",",");
+        String[] keys=key.split(",");
+        for (String key1 : keys) {
+            key2 = key2 + "%" + key1;
+        }
+        key2=key2.concat("%");
+
+        String sql="select * from products where concat(description,name,category,price) like ?";
+        return runner.query(sql,new BeanListHandler<Product>(Product.class),key2);
+    }
 }

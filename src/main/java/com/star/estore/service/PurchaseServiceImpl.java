@@ -7,6 +7,7 @@ import com.star.estore.domain.Purchase;
 import com.star.estore.domain.User;
 import com.star.estore.exception.PrivilegeException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -22,12 +23,14 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public List<Product> findAll() throws Exception {
-        return null;
+    public List<Purchase> find12() throws SQLException {
+        PurchaseDao dao=new PurchaseDao();
+        return dao.find12();
     }
 
     @Override
-    public Product findByInfo(String keyword) throws Exception {
-        return null;
+    public List<Purchase> findAll() throws SQLException {
+        PurchaseDao dao=new PurchaseDao();
+        return dao.findAll();
     }
 }

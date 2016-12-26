@@ -9,12 +9,17 @@
     <link rel="stylesheet" type="text/css" href="css/normal.css">
     <script src="js/jquery.js?v=1.83.min" type="text/javascript"></script>
     <script src="js/load.js"></script>
+    <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/sucaijiayuan.js"></script>
     <script src="js/home_page.js"></script>
     <title>校园二手街</title>
 </head>
 <%
     response.setHeader("Pragma","No-cache");
+    request.setCharacterEncoding("utf-8");
+    response.setCharacterEncoding("utf-8");
 %>
 
 <body style=" background: -webkit-linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5)) no-repeat;
@@ -26,30 +31,36 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 <div style="max-width: 1400px;margin: 0 auto;">
 
 
-<!--头部开始-->
-<div id="header"  class="col-12 center " >
-<div class="col-1">
-    <!--<img style="max-width: 100%;" src="images/logo.png">-->
-</div>
-    <div class="col-3   col-4-n">
-        <img style="max-width:120px;display: inline;" src="images/logo.png">
-          <h1 >校园服务街</h1>
-          <p>最安全方便的校园服务平台</p>
-    </div>
+    <!--头部开始-->
+    <div  class="col-12 center header" >
+        <div class="col-1">
+        </div>
+        <div class="col-3  ">
+            <img class="logo-img" src="images/logo.png">
+            <div class="logo-text">
+                <p  style="font-size: 30px;">校园服务街</p>
+                <p>最安全方便的校园服务平台</p>
+            </div>
+        </div>
+
 
     <!--收索框-->
-    <div class="col-8  col-8-n">
+    <div class="col-5 ">
         <div class="search-box">
-            <form action="" method="get" id="searchForm">
-                <input type="search" name="searchYour" placeholder="搜 你 所 想" class="search1"/>
-                <input type="submit" name="search" value="搜 索" class="search2"/>
+            <form action="${pageContext.request.contextPath}/product" method="post" id="searchForm">
+                <input type="hidden" name="method" value="findByKey">
+                <input type="search" name="key" placeholder="搜 你 所 想" class="search1"/>
+                <input type="submit" name="search" value=" " class="search2"/>
             </form>
         </div>
-        <div class="log-box">
+    </div>
+    <div class="col-3">
+        <div class="log-box ">
             <span class="to_login">登录</span>
             <span class="to_register">注册</span>
         </div>
     </div>
+
     <div class="a登录注册框">
         <!--登录开始-->
         <div class="mask"></div>
@@ -230,25 +241,72 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 <!--主体开始-->
 <div id="main" class="row" >
 
-    <div class="col-9" >
-        <div class="centerimg"><!--高清图片-->
-        <img src="images/center.jpg" /></div>
+    <!--lunbotu-->
+    <div class="col-9  centerimg">
+        <div class="carousel slide" id="carousel-49578">
+            <ol class="carousel-indicators">
+                <li class="active" data-slide-to="0" data-target="#carousel-49578">
+                </li>
+                <li data-slide-to="1" data-target="#carousel-49578">
+                </li>
+                <li data-slide-to="2" data-target="#carousel-49578">
+                </li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img alt="" src="images/goods2.jpg" />
+                    <div class="carousel-caption">
+                        <h4>
+                            First Thumbnail label
+                        </h4>
+                        <p>
+                            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img alt="" src="images/goods4.jpg" />
+                    <div class="carousel-caption">
+                        <h4>
+                            Second Thumbnail label
+                        </h4>
+                        <p>
+                            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img alt="" src="images/goods1.jpg" />
+                    <div class="carousel-caption">
+                        <h4>
+                            Third Thumbnail label
+                        </h4>
+                        <p>
+                            Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                        </p>
+                    </div>
+                </div>
+            </div> <a class="left carousel-control" href="#carousel-49578" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-49578" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
     </div>
+
 
     <div class="col-3" ><!--侧边栏-->
         <span class="release"> <a href="publish.jsp" >我要发布</a></span>
         <span class="buy"> <a href="collect.jsp" >我要求购</a></span>
-        <marquee id="purchase_show" align="left" class="fabuxiangqing" behavior="scroll"  direction="up"
+        <marquee  align="left" class="fabuxiangqing" behavior="scroll"  direction="up"
                  height="300" width="98%"  loop="-1"  scrolldelay="1" speed="10"
                  onMouseOut="this.start()" onMouseOver="this.stop()" >
-
+        <span id="purchase_show"></span>
         </marquee>
     </div>
 </div>
 <div id="section">
     <div class="row">
 
-        <div class="col-12"><hr  style="width:20px;border: 1px solid red;"/><h2 style="text-align: center;">新品推荐</h2><hr /></div>
+        <div class="col-12"><hr  style="width:20px;border: 1px solid red;"/><h2 style="text-align: center;"><img
+                src="images/xinping-left.png"/> 新品推荐
+            <img src="images/xinping-right.png"/></h2><hr/></div>
 		<!-- 商品详情，由load.js中的jquery ajax填充，商品将会被填充在#page_hot之后-->
         <div>
         <span id="page_hot"></span>
@@ -256,526 +314,30 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         </div>
 
         <div class="col-12"><h3 id="a1">校园代步</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
+
 
         <div class="col-12"><h3 id="a2">手机</h3><hr style="margin-left:0;width:45px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
 
         <div class="col-12"><h3 id="a3">电脑</h3><hr style="margin-left:0;width:45px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
+
 
         <div class="col-12"><h3 id="a4">数码产品</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" >  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1">  <a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
+
 
         <div class="col-12"><h3 id="a5">数码配件</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
+
 
         <div class="col-12"><h3 id="a6">运动健身</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
+
 
         <div class="col-12"><h3 id="a7">衣物用品</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
+
 
         <div class="col-12"><h3 id="a8">图书教材</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
 
         <div class="col-12"><h3 id="a9">其他</h3><hr style="margin-left:0;width:45px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6 ">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
-        <div class="col-6">
-            <div class="shangpin1" ><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-            <div class="shangpin1"><a href="goods_details.jsp" style="display: block;">
-                <img src="images/homepage_goods1.jpg"/><br/>
-                <span>对商品的简单描述</span>
-                <br/>
-                <span>商品的价格</span>
-            </a></div>
-        </div>
+
+
     </div>
 </div>
 <div style="height:50px;"></div>
@@ -805,7 +367,8 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
             <li><a href="#a7">衣物用品</a></li>
             <li><a href="#a8">图书教材</a></li>
             <li><a href="#a9">其他</a></li>
-            <li><a href="personal_homepage.jsp" >个人中心</a></li>
+            <li><a href="personal_homepage.html" >个人中心</a></li>
+            <li>未登录</li>
         </ul>
     </div>
 </div>
@@ -878,8 +441,6 @@ var login_status = document.getElementById("login_status");
         hideDiv();
 
     };
-
-
 
 
 </script>

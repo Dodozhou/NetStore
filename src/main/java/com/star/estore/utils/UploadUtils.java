@@ -1,5 +1,7 @@
 package com.star.estore.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -27,12 +29,8 @@ public class UploadUtils {
     }
 
     //获取hashcode生成二级目录
-    public static String generateRandomDir(String uuidFileName){
-        int hashCode = uuidFileName.hashCode();
-        //一级目录
-        int d1 = hashCode & 0xf;
-        //二级目录
-        int d2 = (hashCode>>4) & 0xf;
-        return "/"+d1+"/"+d2;
+    public static String generateRandomDir(){
+        SimpleDateFormat df=new SimpleDateFormat("/yyyy/MM/dd/HH");
+        return df.format(new Date());
     }
 }

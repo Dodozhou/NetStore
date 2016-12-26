@@ -390,4 +390,10 @@
     .goodsname .dellist .detailul li {
         margin-left:-7px;
     }
+    #con1 span{
+        padding: 0 15px;
+    }
+    #con1  p{
+        padding: 0 30px;
+    }
 }

@@ -68,7 +68,7 @@ public class AddProductServlet extends HttpServlet {
                         //得到随机名称
                         String uuidFileName = UploadUtils.generateRandomFileName(filename);
                         //得到随机目录
-                        String randomDir = UploadUtils.generateRandomDir(uuidFileName);
+                        String randomDir = UploadUtils.generateRandomDir();
                         //合成path
                         String path = this.getServletContext().getRealPath("/upload"+randomDir);
 
@@ -109,6 +109,7 @@ public class AddProductServlet extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             try {
                 service.add(user,product);
+                request.getSession().setAttribute("pname",product.getName());
                 response.sendRedirect(request.getContextPath()+"/publish.jsp");
             } catch (Exception e) {
                 e.printStackTrace();

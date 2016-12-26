@@ -1,6 +1,7 @@
 package com.star.estore.web.servlet;
 
 
+import com.google.gson.Gson;
 import com.star.estore.domain.Purchase;
 import com.star.estore.domain.User;
 import com.star.estore.service.PurchaseService;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 public class PurchaseServlet extends HttpServlet {
@@ -20,23 +23,34 @@ public class PurchaseServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String method = request.getParameter("method");
-		if ("add".equals(method)){
+        if ("add".equals(method)){
 			try {
 				addColl(request,response);
 			} catch (Exception e) {
-System.out.println("封装求购信息失败，在PurchaseServlet里。");
 				e.printStackTrace();
 			}
 		}else if ("findBykey".equals(method)) {
 			// 根据id查找求购信息
-
-		} else if ("findAll".equals(method) || method == null) {
-			// 查找全部求购信息
-
-		}
+		} else if ("find12".equals(method)) {
+			find12(request,response);
+		}else if ("findAll".equals(method)){
+            findAll(request,response);
+        }
 	}
 
-	private void addColl(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    private void findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PurchaseService service=new PurchaseServiceImpl();
+        List<Purchase> pu= null;
+        try {
+            pu = service.findAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Gson gson=new Gson();
+        response.getWriter().write(gson.toJson(pu));
+    }
+
+    private void addColl(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		User user=(User)request.getSession().getAttribute("user");
 		if (user==null){
 			response.getWriter().write("请先登录！");
@@ -47,7 +61,6 @@ System.out.println("封装求购信息失败，在PurchaseServlet里。");
 		try {
 			BeanUtils.populate(purchase,map);
 		} catch (IllegalAccessException | InvocationTargetException e) {
-			System.out.println("求购信息封装失败");
 			e.printStackTrace();
 		}
 		PurchaseService service= new PurchaseServiceImpl();
@@ -88,28 +101,24 @@ System.out.println("封装求购信息失败，在PurchaseServlet里。");
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	// 查找所有商品
-	public void findAll(HttpServletRequest request, HttpServletResponse response)
+	public void find12(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			// 1.查询所有商品
-			ProductService service = ProductServiceFactory.getInstance();
-			List<Product> ps = service.findAll();
+			// 1.查询前12的求购信息
+			PurchaseService service = new PurchaseServiceImpl();
+			List<Purchase> ps = service.find12();
 
-			// 2.装填查询获得的信息
-//			request.setAttribute("ps", ps);
 			Gson gson=new Gson();
 			response.getWriter().write(gson.toJson(ps));
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 //		request.getRequestDispatcher("/page.jsp").forward(request, response);
-	}*/
+	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

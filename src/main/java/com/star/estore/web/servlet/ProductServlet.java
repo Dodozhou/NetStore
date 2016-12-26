@@ -6,6 +6,7 @@ import com.star.estore.domain.Product;
 import com.star.estore.domain.User;
 import com.star.estore.factory.ProductServiceFactory;
 import com.star.estore.service.ProductService;
+import com.star.estore.service.ProductServiceImpl;
 import com.star.estore.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -14,12 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ProductServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
 		String method = request.getParameter("method");
 
 		if ("findById".equals(method)) {
@@ -28,7 +31,27 @@ public class ProductServlet extends HttpServlet {
 		} else if ("findAll".equals(method) || method == null) {
 			// 查找全部商品
 			findAll(request, response);
+		}else if ("findByKey".equals(method)){
+				findByKey(request,response);
 		}
+	}
+
+	private void findByKey(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String key=request.getParameter("key");
+		ProductService service=new ProductServiceImpl();
+        List<Product> pr= new LinkedList<>();
+        try {
+            pr = service.findByKey(key);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (pr.size()==0){
+			response.getWriter().write("您要搜索的商品不存在");
+		}else{
+			request.setAttribute("pr",pr);
+			request.getRequestDispatcher("/search.jsp").forward(request,response);
+		}
+
 	}
 
 	// 根据id查找商品

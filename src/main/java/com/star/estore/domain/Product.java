@@ -1,6 +1,8 @@
 package com.star.estore.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by hp on 2016/12/4.
@@ -22,6 +24,15 @@ public class Product implements Serializable {
     private String QQ;
     private String phone;
     private int owner;
+    private Timestamp update_time;
+
+    public Timestamp getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Timestamp update_time) {
+        this.update_time = update_time;
+    }
 
     public int getOwner() {
         return owner;

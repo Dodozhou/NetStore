@@ -5,6 +5,7 @@ import com.star.estore.domain.Product;
 import com.star.estore.domain.User;
 import com.star.estore.exception.PrivilegeException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -35,5 +36,11 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> findSell(User user) throws PrivilegeException, Exception {
         ProductDao dao = new ProductDao();
         return dao.findSell();
+    }
+
+    @Override
+    public List<Product> findByKey(String key) throws SQLException {
+        ProductDao dao=new ProductDao();
+        return dao.findByKey(key);
     }
 }

@@ -118,7 +118,6 @@
   <servlet>
     <servlet-name>PurchaseServlet</servlet-name>
     <servlet-class>com.star.estore.web.servlet.PurchaseServlet</servlet-class>
-    <description>这是求购处理的servlet</description>
   </servlet>
   <servlet-mapping>
     <servlet-name>PurchaseServlet</servlet-name>
