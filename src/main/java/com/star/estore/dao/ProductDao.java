@@ -9,6 +9,7 @@ import com.sun.mail.util.QEncoderStream;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.taglibs.standard.tag.common.sql.DataSourceUtil;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,9 +20,9 @@ import java.util.List;
 public class ProductDao {
     public void addProduct(Product p) throws SQLException {
         QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
-        String sql = "insert into products values(?,?,?,?,?,?,?,?,?,?,?,?,null)";
+        String sql = "insert into products values(?,?,?,?,?,?,?,?,?,?,?,null)";
         runner.update(sql,p.getId(),p.getName(),p.getPrice(),p.getCategory(),
-                p.getPnum(),p.getImgurl(),p.getDescription(),p.getDealps(),
+                p.getImgurl(),p.getDescription(),p.getDealps(),
                 p.isDiscount(),p.getQQ(),p.getPhone(), p.getOwner());
     }
 
@@ -43,54 +44,8 @@ public class ProductDao {
        return runner.query(sql,new BeanListHandler<Product>(Product.class));
    }
 
-    // 当删除订单时，修改商品数量
-    public void updateProductCount(List<OrderItem> items) throws SQLException {
 
-        Object[][] params = new Object[items.size()][2];
 
-        for (int i = 0; i < items.size(); i++) {
-
-            OrderItem item = items.get(i);
-            params[i][0] = item.getBuynum();
-            params[i][1] = item.getProduct_id();
-
-        }
-
-        String sql = "update products set pnum=pnum+? where id=?";
-
-        QueryRunner runner = new QueryRunner();
-
-        runner.batch(DataSourceUtils.getConnection(), sql, params);
-    }
-
-    // 修改商品的数量
-    public void updateProductCount(Order order) throws SQLException {
-
-        // 要修改的数量在哪?
-        List<OrderItem> items = order.getOrderItems();
-
-        Object[][] params = new Object[items.size()][2];
-
-        for (int i = 0; i < items.size(); i++) {
-
-            OrderItem item = items.get(i);
-            params[i][0] = item.getBuynum();
-            params[i][1] = item.getProduct_id();
-
-        }
-
-        String sql = "update products set pnum=pnum-? where id=?";
-
-        QueryRunner runner = new QueryRunner();
-
-        runner.batch(DataSourceUtils.getConnection(), sql, params);
-
-        // for(OrderItem item:items){
-        //
-        // runner.update(sql,item.getBuynum(),item.getProduct_id());
-        //
-        // }
-    }
 
     public List<Product> findByKey(String key) throws SQLException {
         QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
@@ -106,5 +61,11 @@ public class ProductDao {
 
         String sql="select * from products where concat(description,name,category,price) like ?";
         return runner.query(sql,new BeanListHandler<Product>(Product.class),key2);
+    }
+
+    public List<Product> findByUser(int id) throws SQLException {
+        QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
+        String sql="select * from products where owner=?";
+        return runner.query(sql,new BeanListHandler<Product>(Product.class),id);
     }
 }

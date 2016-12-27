@@ -7,7 +7,6 @@ import com.star.estore.domain.User;
 import com.star.estore.factory.ProductServiceFactory;
 import com.star.estore.service.ProductService;
 import com.star.estore.service.ProductServiceImpl;
-import com.star.estore.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +32,28 @@ public class ProductServlet extends HttpServlet {
 			findAll(request, response);
 		}else if ("findByKey".equals(method)){
 				findByKey(request,response);
+		}else if ("findByOwner".equals(method)){
+			findByOwner(request,response);
+		}
+	}
+
+	private void findByOwner(HttpServletRequest request, HttpServletResponse response) {
+		User user=(User)request.getSession().getAttribute("user");
+		int id=user.getId();
+		ProductService service=new ProductServiceImpl();
+		List<Product> pr=new LinkedList<>();
+		try {
+			//将查询结果装填进pr链表中
+			pr=service.findByUser(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		Gson gson=new Gson();
+		try {
+			response.getWriter().write(gson.toJson(pr));
+		} catch (IOException e) {
+			//输出流错误，或json转换出错
+			e.printStackTrace();
 		}
 	}
 

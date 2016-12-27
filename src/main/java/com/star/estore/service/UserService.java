@@ -8,10 +8,11 @@ import com.star.estore.exception.RegistException;
  */
 public interface UserService {
     //注册功能
-    public void regist(User user) throws RegistException;
+    public void regist(User user,String pro_path) throws RegistException;
     //登录操作
     public User login(String username,String password) throws Exception;
     //激活操作
     public void activeUser(String activecode) throws Exception;
 
+    User findById(int id);
 }

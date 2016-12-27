@@ -28,4 +28,6 @@ public interface ProductService {
     public List<Product> findSell(User user) throws PrivilegeException,Exception;
 
     List<Product> findByKey(String key) throws SQLException;
+
+    List<Product> findByUser(int id) throws SQLException;
 }

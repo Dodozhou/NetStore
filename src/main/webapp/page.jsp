@@ -10,10 +10,9 @@
     <script src="js/jquery.js?v=1.83.min" type="text/javascript"></script>
     <script src="js/load.js"></script>
     <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/sucaijiayuan.js"></script>
-    <script src="js/home_page.js"></script>
     <title>校园二手街</title>
 </head>
 <%
@@ -32,32 +31,49 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 
 
     <!--头部开始-->
+    <!--登录注册-->
+    <div class="log-box">
+
+        <small class="left_to" ><a href="page.jsp"><img src="images/return-homepage.png"/><label >首页</label> </a></small>
+        <p>
+        <span class="right_to">
+            <c:if test="${empty user }">
+                &nbsp;
+                <span style="color: red;" id="login_status">请登录!</span>
+            </c:if>
+        <c:if test="${not empty user }">
+        &nbsp;
+        <span>
+            欢迎您！${user.username}
+            </c:if>
+        </span>
+                </span>
+            <%--<span id="login_status">未登录</span>--%>
+            <span class="to_login right_to">登录</span>
+            <span class="to_register right_to">注册</span>
+        </p>
+    </div>
+
     <div  class="col-12 center header" >
         <div class="col-1">
         </div>
-        <div class="col-3  ">
+
+        <!--logo-->
+        <div class="col-5  ">
             <img class="logo-img" src="images/logo.png">
             <div class="logo-text">
                 <p  style="font-size: 30px;">校园服务街</p>
                 <p>最安全方便的校园服务平台</p>
             </div>
         </div>
-
-
     <!--收索框-->
-    <div class="col-5 ">
+    <div class="col-6 ">
         <div class="search-box">
             <form action="${pageContext.request.contextPath}/product" method="post" id="searchForm">
                 <input type="hidden" name="method" value="findByKey">
                 <input type="search" name="key" placeholder="搜 你 所 想" class="search1"/>
                 <input type="submit" name="search" value=" " class="search2"/>
             </form>
-        </div>
-    </div>
-    <div class="col-3">
-        <div class="log-box ">
-            <span class="to_login">登录</span>
-            <span class="to_register">注册</span>
         </div>
     </div>
 
@@ -90,7 +106,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                     <input type="hidden" name="method" value="regist">
                     <label>用户名</label><input  type="text" name="username"  id="username"  required /><br/>
                     <label>密码</label><input  type="password" name="password"  id="password" required  /><br/>
-                    <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onkeyup="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
+                    <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onblur="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
                     <label>昵称</label><input  type="text"  name="nickname" id="nickname"   required/><br/>
                     <label> 邮箱</label> <input  type="email" name="email" id="email" required  title="email的格式是xxx@xxx.xx"/><br/>
                     <label>验证码</label><input  type="text" name="checkcode" id="code" class="ckeckcode" required/>
@@ -204,26 +220,14 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
             <li class="my" style="margin-left: 30px">
                 <img src="images/my.png"/>
                 <ul class="ul1" >
-                    <li> <a href="personal_homepage.jsp"> 个人中心</a></li>
-                    <li>  <a href="personal_homepage.jsp"> 收藏</a></li>
-                    <li>  <a href="personal_homepage.jsp"> 消息</a></li>
+                    <li> <a href="per_home.jsp"> 个人中心</a></li>
+                    <li>  <a href="per_home.jsp"> 收藏</a></li>
+                    <li>  <a href="per_home.jsp"> 消息</a></li>
                     <c:if test="${not empty user }">
                     <li>  <a href="${pageContext.request.contextPath}/user?method=logout"> 注销</a></li>
                     </c:if>
                 </ul>
              </li>
-            <li >
-				 <c:if test="${empty user }">
-                     &nbsp;
-                <p style="color: red;margin-left: -60px">请登录!</p>
-				</c:if>
-				<c:if test="${not empty user }">
-                &nbsp;
-                <p style="margin-left: -60px">
-				欢迎您！${user.username}
-				</c:if>
-                </p>
-            </li>
         </ul>
     </div>
 
@@ -442,6 +446,20 @@ var login_status = document.getElementById("login_status");
 
     };
 
+    var password = document.getElementById("password");
+    var repassword=document.getElementById("repassword");
+
+    repassword.onblur=function() {
+        if(this.value != password.value) {
+            document.getElementById("tishi").innerHTML="<font color='red'>两次密码不同</font>";
+            document.getElementById("submit").disabled = true;
+        }
+        else {
+            document.getElementById("tishi").innerHTML="<font color='#fff'>两次密码相同</font>";
+            document.getElementById("submit").disabled = false;
+        }
+
+    }
 
 </script>
 </body>

@@ -21,38 +21,51 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 <div style="max-width: 1400px;margin: 0 auto;">
 
 
-
-
     <!--头部开始-->
+    <!--登录注册-->
+    <div class="log-box">
+
+        <small class="left_to" ><a href="page.jsp"><img src="images/return-homepage.png"/><label >首页</label> </a></small>
+        <p>
+        <span class="right_to">
+            <c:if test="${empty user }">
+                &nbsp;
+                <span style="color: red;" id="login_status">请登录!</span>
+            </c:if>
+        <c:if test="${not empty user }">
+        &nbsp;
+        <span>
+            欢迎您！${user.username}
+            </c:if>
+        </span>
+                </span>
+            <%--<span id="login_status">未登录</span>--%>
+            <span class="to_login right_to">登录</span>
+            <span class="to_register right_to">注册</span>
+        </p>
+    </div>
+
+
     <div  class="col-12 center header" >
-        <div class="col-2">
-            <small><a href="page.jsp"> <img src="images/return-homepage.png"/> 返回首页 </a></small>
+        <div class="col-1">
         </div>
-        <div class="col-3">
+
+        <!--logo-->
+        <div class="col-5  ">
             <img class="logo-img" src="images/logo.png">
             <div class="logo-text">
                 <p  style="font-size: 30px;">校园服务街</p>
                 <p>最安全方便的校园服务平台</p>
             </div>
         </div>
-
-
-
-
         <!--收索框-->
-        <div class="col-5 ">
+        <div class="col-6 ">
             <div class="search-box">
                 <form action="${pageContext.request.contextPath}/product" method="post" id="searchForm">
                     <input type="hidden" name="method" value="findByKey">
                     <input type="search" name="key" placeholder="搜 你 所 想" class="search1"/>
                     <input type="submit" name="search" value=" " class="search2"/>
                 </form>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="log-box ">
-                <span class="to_login">登录</span>
-                <span class="to_register">注册</span>
             </div>
         </div>
 
@@ -85,7 +98,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <input type="hidden" name="method" value="regist">
                         <label>用户名</label><input  type="text" name="username"  id="username"  required /><br/>
                         <label>密码</label><input  type="password" name="password"  id="password" required  /><br/>
-                        <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onkeyup="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
+                        <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onblur="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
                         <label>昵称</label><input  type="text"  name="nickname" id="nickname"   required/><br/>
                         <label> 邮箱</label> <input  type="email" name="email" id="email" required  title="email的格式是xxx@xxx.xx"/><br/>
                         <label>验证码</label><input  type="text" name="checkcode" id="code" class="ckeckcode" required/>
@@ -101,7 +114,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                             ${m.value }<br>
                         </c:forEach>
                         <input type="submit" id="submit"  class="register" value=" 注   册 " >
-                        <input type="reset"  class="register" value=" 取   消 "><br/><br/>
+                        <input type="reset"  class="register" value=" 重   置 "><br/><br/>
                         <label> <a href="#" onclick="login()">去登录</a></label><br/>
                     </form>
                 </div>

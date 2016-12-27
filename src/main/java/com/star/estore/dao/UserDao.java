@@ -8,7 +8,9 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import sun.text.normalizer.NormalizerBase;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
+import java.util.Map;
 
 /**
  * User对象的持久化类
@@ -83,5 +85,21 @@ System.out.println("根据id查找用户失败，可能是id不存在");
             e.printStackTrace();
         }
         return user;
+    }
+
+    public Boolean update_info(Map<String, String> map) throws SQLException {
+        QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
+        String sql="update users set nickname=?,phone=?,QQ=? where id=?";
+        //返回受影响的行数
+        int i=runner.update(sql,map.get("nickname"),map.get("phone"),map.get("QQ"),
+                map.get("id"));
+        return i > 0;
+    }
+
+    public void update_header(String header,int id) throws SQLException {
+        QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
+        String sql="update users set header=? where id=?";
+        runner.update(sql,header,id);
+
     }
 }

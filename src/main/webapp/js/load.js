@@ -31,7 +31,7 @@ $(document).ready(function () {
     $.getJSON("http://localhost:8888/pur?method=find12",function (pu) {
         $.each(pu,function(index){
             $("#purchase_show").after(
-                "<p><a href='purchase_information.jsp#"+pu[index].id+
+                "<p><a href='pur_info.jsp#"+pu[index].id+
                 "'>"+
                 pu[index].description+"  &&  ￥："+pu[index].price+
                 "</a></p>"

@@ -29,7 +29,6 @@ public class OrderServiceImpl implements OrderService {
 			// 2.向orderitem表中添加数据
 			idao.addOrderItem(order);
 			// 3.修改products表中数据
-			pdao.updateProductCount(order);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			try {
@@ -78,7 +77,6 @@ public class OrderServiceImpl implements OrderService {
 			// 1.1 得到商品的数量
 			List<OrderItem> items = idao.findOrderItemByOrderId(id);
 			// 1.2修改商品的数量
-			pdao.updateProductCount(items);
 			// 2.删除订单项
 			idao.delOrderItem(id);
 			// 3.删除订单

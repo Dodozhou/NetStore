@@ -18,7 +18,7 @@ html{overflow-x: hidden;}
     clear: both;
 }
 .center{margin: 0 auto;}
-body{width:100%;}
+body{width:100%;margin: 0;}
 
 @media only screen and (min-width: 770px) {
     .col-1 {width: 8.33%;}
@@ -119,27 +119,60 @@ body{width:100%;}
 .search-box .search2:hover{
     opacity: 0.8;
 }
-.header .log-box   {
-    display:inline-block;
-    margin:30px auto;
+ .log-box   {
+     width: 80%;
+    display:flex;
+     display: -webkit-flex;
+     justify-content: space-between;
+     margin: 0 auto;
 }
+.log-box small a{
+    text-decoration: none;
+    cursor: pointer;
+}
+.log-box  .left_to{float: left;}
+.log-box  .right_to{
+    float: right;
+}
+.log-box small a label{color: rgba(43,76,126,0.7); }
+.log-box small a img{margin-right: 10px;vertical-align: middle;}
+.log-box small a:hover,
+.log-box small a:focus
+{
+    text-decoration: dashed;
+}
+.log-box small a label:hover,
+.log-box small a label:focus{
+    color: rgba(43,76,126,1);
+}
+ .log-box p{
+     margin: 0;
+     padding: 0;
+ }
+ .log-box small{
+     color: rgba(145, 145, 145, 0.8);
+ }
 .log-box .to_login{
     border: 1px solid rgba(0,0,0,0.2);
-    padding: 10px 15px;
+    padding: 3px 8px;
     cursor: pointer;
+    margin: 0  15px;
 }
 .log-box .to_register{
     border: 1px solid rgba(0,0,0,0.2);
-    padding: 10px 15px;
+    padding: 3px 8px;
     cursor: pointer;
 }
+#login_status{
+    line-height: 25px;
+}
 .to_login:hover{
-    border:2px solid rgba(43,76,126,0.8);
+    border:1px solid rgba(43,76,126,0.8);
     color:rgba(43,76,126,1);
     box-shadow: 1px 3px 5px 0 rgba(0,0,0,0.24),2px 1px 2px 0 rgba(0,0,0,0.19);
 }
 .to_register:hover{
-    border:2px solid rgba(43,76,126,0.8);
+    border:1px solid rgba(43,76,126,0.8);
     color:rgba(43,76,126,1);
     box-shadow: 1px 3px 5px 0 rgba(0,0,0,0.24),2px 1px 2px 0 rgba(0,0,0,0.19);
 }
@@ -149,7 +182,7 @@ body{width:100%;}
     width: 100%;
     background: rgba(61, 61, 61, 0.7);
     position:absolute;
-    z-index: 1;
+    z-index:89;
     margin: 0;
     padding: 0;
     left:0;
@@ -158,7 +191,7 @@ body{width:100%;}
 }
 .log_box{
     width:300px;
-    padding: 3px 5px;z-index: 2;position: absolute;
+    padding: 3px 5px;z-index: 100;position: absolute;
     left:40%;top:20px;
     -moz-box-shadow: 10px 10px 10px rgba(0,0,0,1) inset, -9px -9px 8px rgba(0,0,0,1) inset;
     -webkit-box-shadow: 8px 8px 8px rgba(0,0,0,1) inset, -9px -9px 8px rgba(0,0,0,1) inset;
@@ -167,7 +200,7 @@ body{width:100%;}
 }
 .register_box{
     width:300px;
-    z-index: 2;position: absolute;
+    z-index: 100;position: absolute;
     left:40%;top:20px;
     display: none;
     padding: 3px 5px;

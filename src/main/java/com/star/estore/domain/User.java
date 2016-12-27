@@ -24,6 +24,15 @@ public class User {
     private Timestamp updatetime; // 更新时间
     private String QQ;
     private String phone;
+    private String header;
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
 
     public String getQQ() {
         return QQ;

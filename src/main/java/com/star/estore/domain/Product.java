@@ -13,7 +13,6 @@ public class Product implements Serializable {
     private String name; // 名称
     private double price; // 价格
     private String category; // 分类
-    private int pnum; // 数量
     private String imgurl; // 图片路径
     private String description; // 描述
     // 在获取销售榜单信息时使用
@@ -104,14 +103,6 @@ public class Product implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public int getPnum() {
-        return pnum;
-    }
-
-    public void setPnum(int pnum) {
-        this.pnum = pnum;
     }
 
     public String getImgurl() {

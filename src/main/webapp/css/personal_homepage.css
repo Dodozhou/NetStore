@@ -68,7 +68,7 @@
 body{
 	font-family: "微软雅黑";
 	margin: 0;
-	background-color: ;
+
 }
 
 
@@ -370,7 +370,7 @@ to {
   border-radius: 5px;
 }
  
-.tabs ul li label span { display: none; }
+/*.tabs ul li label span { display: none; }*/
  
 .tabs .slider { display: none; }
  
@@ -442,4 +442,13 @@ to {
 
 .footer a:hover{
 	color: #428BFF;
+}
+#homepage{
+display: none;
+}
+#homepage input{
+    margin-left: 50px;
+}
+#homepage  .submit1{
+    margin-left: 180px;
 }

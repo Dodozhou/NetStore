@@ -29,20 +29,48 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 
 
     <!--头部开始-->
+    <!--登录注册-->
+    <div class="log-box">
+
+        <small class="left_to" ><a href="page.jsp"><img src="images/return-homepage.png"/><label >首页</label> </a></small>
+        <p>
+        <span class="right_to">
+            <c:if test="${empty user }">
+                &nbsp;
+                <span style="color: red;" id="login_status">请登录!</span>
+            </c:if>
+        <c:if test="${not empty user }">
+        &nbsp;
+        <span>
+            欢迎您！${user.username}
+            </c:if>
+        </span>
+                </span>
+            <%--<span id="login_status">未登录</span>--%>
+            <span class="to_login right_to">登录</span>
+            <span class="to_register right_to">注册</span>
+        </p>
+    </div>
+
+<%--<span id="login_status">未登录</span>--%>
+        <span class="to_login">登录</span>
+        <span class="to_register">注册</span></p>
+    </div>
+
     <div  class="col-12 center header" >
-        <div class="col-2">
-            <small><a href="page.jsp"> <img src="images/return-homepage.png"/> 返回首页 </a></small>
+        <div class="col-1">
         </div>
-        <div class="col-3">
+
+        <!--logo-->
+        <div class="col-5  ">
             <img class="logo-img" src="images/logo.png">
             <div class="logo-text">
                 <p  style="font-size: 30px;">校园服务街</p>
                 <p>最安全方便的校园服务平台</p>
             </div>
         </div>
-
         <!--收索框-->
-        <div class="col-5 ">
+        <div class="col-6 ">
             <div class="search-box">
                 <form action="${pageContext.request.contextPath}/product" method="post" id="searchForm">
                     <input type="hidden" name="method" value="findByKey">
@@ -51,12 +79,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                 </form>
             </div>
         </div>
-        <div class="col-2">
-            <div class="log-box ">
-                <span class="to_login">登录</span>
-                <span class="to_register">注册</span>
-            </div>
-        </div>
+
 
         <div class="a登录注册框">
             <!--登录开始-->
@@ -87,7 +110,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <input type="hidden" name="method" value="regist">
                         <label>用户名</label><input  type="text" name="username"  id="username"  required /><br/>
                         <label>密码</label><input  type="password" name="password"  id="password" required  /><br/>
-                        <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onkeyup="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
+                        <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onblur="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
                         <label>昵称</label><input  type="text"  name="nickname" id="nickname"   required/><br/>
                         <label> 邮箱</label> <input  type="email" name="email" id="email" required  title="email的格式是xxx@xxx.xx"/><br/>
                         <label>验证码</label><input  type="text" name="checkcode" id="code" class="ckeckcode" required/>
@@ -150,7 +173,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                     <li>转卖1笔，0人评价</li>
                     <li>靠谱度：10分</li>
                     <li>性价比：10分</li>
-                    <li><a href="#">查看卖家信息</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user?method=findById&id=<%=u.getId()%>">查看卖家信息</a></li>
                 </ul>
             </div>
         </div>
@@ -196,8 +219,8 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                 </ul>
                 <form action="" method="get">
                     <span>交易方式：</span>
-                    <lable><input name="style" type="radio" value="inline"/>在线交易</lable>
-                    <lable><input name="style" type="radio" value="outline"/>线下交易</lable>
+                    <lable><input name="style" type="radio" value="inline" id="inline"/>在线交易</lable>
+                    <lable><input name="style" type="radio" value="outline" id="outline"/>线下交易</lable>
                 </form><br/>
                 <div style="height: 30px;"></div>
                 <button id="btn1">立即购买</button>
@@ -228,11 +251,22 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                     <span>宝贝介绍</span>
                     <p><%=p.getDescription()%></p></div>
                 <div class="con" id="con2">
-                    <span>留言</span>
-                    <img id="img" src="images/liuyan.png"/>
+                    <span>留言</span><br/><br/>
+                    <section class="information"><span><img src="images/small-head-logo.png"/> 昵称</span><label class="text">好好，好好</label></section>
+                    <section class="information"><span><img src="images/small-head-logo.png"/> 昵称</span><label class="text">好好，好好</label></section>
+                    <section class="information"><span><img src="images/small-head-logo.png"/> 昵称</span><label class="text">好好，好好</label></section>
+                    <section class="information"><span><img src="images/small-head-logo.png"/> 昵称</span><label class="text">好好，好好</label></section>
+                    <div class="information">
+                        <form action="" method="post">
+                            <textarea cols="200" placeholder="你的留言区哟~~~"></textarea><br/>
+                            <input type="submit" value="发布"/>
+                        </form>
+                    </div>
+
                 </div>
                 <div class="con" id="con3">
                     <span>安全保障</span>
+                    <label>由***承包，由***负责的，经由***证实</label>
                 </div>
             </div>
         </div>
@@ -269,7 +303,31 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
     </div>
 </div>
 <!--结尾结束-->
-<script src="http://file.bluesdream.com/js/jquery-1.8.3.min.js"></script>
+    <div class="col-8 outlinepay">
+        <img class="close" id="close" src="images/close_goods.png" onclick="closegoods()"/>
+        卖家昵称： <span>****</span>
+        <h3>交易详情</h3>
+        <hr/>
+        <table>
+            <thead><tr style="font-weight: bold;">
+                <td class="zhifu">支付方式</td>
+                <td class="goodsdeteils">商品名称</td>
+                <td>金额</td>
+            </tr>
+            </thead>
+            <tr>
+                <td>线下支付</td>
+                <td id="goodname">*****</td>
+                <td id="pay">***元</td>
+            </tr>
+        </table>
+        <br/>
+        <button onclick="closegoods()">提交订单</button>
+    </div>
+</div>
+
+
+    <script src="http://file.bluesdream.com/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/img_carousel.js"></script>
 <script type="text/javascript">
     //开始登陆,注册
@@ -281,6 +339,11 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
     var close1 = document.getElementsByClassName("close")[1];
     var log_box = document.getElementsByClassName("log_box")[0];
     var register_box = document.getElementsByClassName("register_box")[0];
+    var outline = document.getElementById("outline");
+    var inline = document.getElementById("inline");
+    var btn1 = document.getElementById("btn1");
+    var outlinepay = document.getElementsByClassName("outlinepay")[0];
+    var close_goods = document.getElementById("close");
 
     to_login.onclick=function(){
         log_box.style.display = "block";
@@ -350,6 +413,21 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         con2.style.display='none';
         con3.style.display='block';
     }
+    function  pay() {
+        if(outline.checked)
+        {
+            mask.style.display = "block";
+            outlinepay.style.display = "block";
+
+        }else{
+            alert("支付宝支付！");
+        }
+    }
+    function closegoods() {
+        outlinepay.style.display = "none";
+        mask.style.display = "none";
+    }
+
 </script>
 </body>
 </html>

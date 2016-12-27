@@ -26,22 +26,44 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 <!--所有内容-->
 <div style="max-width: 1400px;margin: 0 auto;">
 
-
     <!--头部开始-->
+    <!--登录注册-->
+    <div class="log-box">
+
+        <small class="left_to" ><a href="page.jsp"><img src="images/return-homepage.png"/><label >首页</label> </a></small>
+        <p>
+        <span class="right_to">
+            <c:if test="${empty user }">
+                &nbsp;
+                <span style="color: red;" id="login_status">请登录!</span>
+            </c:if>
+        <c:if test="${not empty user }">
+        &nbsp;
+        <span>
+            欢迎您！${user.username}
+            </c:if>
+        </span>
+                </span>
+            <%--<span id="login_status">未登录</span>--%>
+            <span class="to_login right_to">登录</span>
+            <span class="to_register right_to">注册</span>
+        </p>
+    </div>
+
     <div  class="col-12 center header" >
-        <div class="col-2">
-            <small><a href="page.jsp"> <img src="images/return-homepage.png"/> 返回首页 </a></small>
+        <div class="col-1">
         </div>
-        <div class="col-3">
+
+        <!--logo-->
+        <div class="col-5  ">
             <img class="logo-img" src="images/logo.png">
             <div class="logo-text">
                 <p  style="font-size: 30px;">校园服务街</p>
                 <p>最安全方便的校园服务平台</p>
             </div>
         </div>
-
         <!--收索框-->
-        <div class="col-5 ">
+        <div class="col-6 ">
             <div class="search-box">
                 <form action="${pageContext.request.contextPath}/product" method="post" id="searchForm">
                     <input type="hidden" name="method" value="findByKey">
@@ -50,12 +72,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                 </form>
             </div>
         </div>
-        <div class="col-2">
-            <div class="log-box ">
-                <span class="to_login">登录</span>
-                <span class="to_register">注册</span>
-            </div>
-        </div>
+
 
         <div class="a登录注册框">
             <!--登录开始-->
@@ -86,7 +103,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <input type="hidden" name="method" value="regist">
                         <label>用户名</label><input  type="text" name="username"  id="username"  required /><br/>
                         <label>密码</label><input  type="password" name="password"  id="password" required  /><br/>
-                        <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onkeyup="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
+                        <label> 确认密码</label> <input  type="password"  name="repassword" id="repassword" required onblur="informed()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tishi"></span><br/>
                         <label>昵称</label><input  type="text"  name="nickname" id="nickname"   required/><br/>
                         <label> 邮箱</label> <input  type="email" name="email" id="email" required  title="email的格式是xxx@xxx.xx"/><br/>
                         <label>验证码</label><input  type="text" name="checkcode" id="code" class="ckeckcode" required/>
@@ -139,7 +156,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <div class="col-12 upload">
                             <%--实现效果：点击图片出现file选择框--%>
                             <label for="file_up" style="cursor: pointer"><img id="up_img" src="images/upload.png"/></label>
-                            <input type="file" name="img" id="file_up" form="publish" style="display: none;">
+                            <input type="file" name="img" id="file_up"  style="display: none;">
                             <%--效果结束--%>
                         </div>
                         <div class="col-3 span">
@@ -245,16 +262,6 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
     </div>
     <!--结尾结束-->
 </div>
-<script>
-    document.getElementById('file_up').onchange = function() {
-        var imgFile = this.files[0];
-        var fr = new FileReader();
-        fr.onload = function() {
-            document.getElementById('up_img').src = fr.result;
-        };
-        fr.readAsDataURL(imgFile);
-    };
-</script>
 
 <script type="text/javascript">
     //开始登陆,注册
@@ -342,7 +349,17 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 
     autoplay();
 
-
+</script>
+<%--这个必须放在最后？？？否则会失效--%>
+<script>
+    document.getElementById('file_up').onchange = function() {
+        var imgFile = this.files[0];
+        var fr = new FileReader();
+        fr.onload = function() {
+            document.getElementById('up_img').src = fr.result;
+        };
+        fr.readAsDataURL(imgFile);
+    };
 </script>
 </body>
 </html>

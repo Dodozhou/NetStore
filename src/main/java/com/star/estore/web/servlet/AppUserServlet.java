@@ -51,7 +51,8 @@ public class AppUserServlet extends HttpServlet {
     private void regist(HttpServletRequest request, HttpServletResponse response,Map<String,String> map) throws IOException {
         //存储反馈信息的map
         Map<String,String> map1=new HashMap<>();
-       /* //接受客户端提交的checkcode
+
+        //接受客户端提交的checkcode
         String checkcode=map.get("checkcode");
         //获得后台生成的checkcode_session
         String _checkcode=(String)request.getSession().getAttribute("checkcode_session");
@@ -63,14 +64,15 @@ public class AppUserServlet extends HttpServlet {
             map1.put("state", "-1");
             sendDetail(map1, response);
             return;
-        }*/
+        }
 
         User user=new User();
         try {
             BeanUtils.populate(user,map);
             user.setActivecode(UUID.randomUUID().toString());
             UserService service = new UserServiceImpl();
-            service.regist(user);
+            String pro_path=request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+"/";
+            service.regist(user,pro_path);
         } catch (IllegalAccessException | InvocationTargetException e) {
             map1.put("msg1","load user info failed!");
             e.printStackTrace();

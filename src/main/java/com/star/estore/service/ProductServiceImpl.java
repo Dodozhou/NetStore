@@ -43,4 +43,10 @@ public class ProductServiceImpl implements ProductService{
         ProductDao dao=new ProductDao();
         return dao.findByKey(key);
     }
+
+    @Override
+    public List<Product> findByUser(int id) throws SQLException {
+        ProductDao dao=new ProductDao();
+        return dao.findByUser(id);
+    }
 }
