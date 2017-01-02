@@ -24,7 +24,7 @@
 
 <body>
 	<div align="center">
-		<h1>管理员不在，请稍候联系</h1>
+		<h1>服务器太忙啦！请稍候再试！</h1>
 	</div>
 </body>
 </html>

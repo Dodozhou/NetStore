@@ -49,4 +49,10 @@ public class ProductServiceImpl implements ProductService{
         ProductDao dao=new ProductDao();
         return dao.findByUser(id);
     }
+
+    @Override
+    public List<Product> findByCate(String cate) throws SQLException {
+        ProductDao dao=new ProductDao();
+        return dao.findByCate(cate);
+    }
 }

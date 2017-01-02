@@ -4,12 +4,18 @@
 <!DOCTYPE html>
 <html >
 <head>
+	<%--禁用缓存--%>
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--Responsive layout：响应式布局-->
-    <link rel="stylesheet" type="text/css" href="css/normal.css">
+	<link rel="stylesheet" type="text/css" href="css/normal.css">
     <link rel="stylesheet" type="text/css" href="css/personal_homepage.css"/>
     <script src="js/home_page.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/favorite.js"></script>
     <script src="js/per_info.js"></script>
     <title>校园二手街</title>
 </head>
@@ -146,14 +152,17 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 				
 				<div class="basic row">
 					<div class="col-3" id="head-icon">
-						<form method="post" action="${pageContext.request.contextPath}/user?method=header" enctype="multipart/form-data">
-						<%--实现效果：点击图片出现file选择框--%>
-						<label for="file_up" style="cursor: pointer"><img src="${pageContext.request.contextPath}<%=u.getHeader()%>" height="150px" width="150px" /></label>
-						<input type="file" name="img" id="file_up"  style="display: none;">
-						<%--效果结束--%>
-							<br>
-							<input type="submit" id="submit" value="提交">
-						</form>
+
+							<form method="post" action="${pageContext.request.contextPath}/user?method=header"  enctype="multipart/form-data">
+								<label for="file_up" class="imglogo" >
+									<img class="changeimg" id="header" src="${pageContext.request.contextPath}<%=u.getHeader()%>" height="150px" width="150px" />
+									<span class="userlogo">✐ 点击编辑 </span></label>
+								<input type="file" name="img" id="file_up"  style="display: none;">
+								<br>
+								<input type="submit" id="submit1" class="submit" value=" 提交">
+							</form>
+
+
 					</div>
 					<div class="basic-infor col-9">
 						<h2><%=u.getNickname()%></h2>
@@ -216,16 +225,8 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 						</section>
 						<section  id="tab3">
 							<h2>我的收藏</h2>
-							<div class="mine row">
-								<div class="mine-img col-3">
-									<img src="images/demo.jpg" />
-								</div>
-								<div class="mine-txt col-9">
-									<h3>收藏的商品名称<button>取消收藏</button></h3>
-									<p>商品信息简介</p>
-									<p>商品状态：出售中</p>
-								</div>
-							</div>
+                            <span id="favorite"></span>
+
 						</section>
 						<section id="tab4">
 							<h2>消息中心</h2>
@@ -369,8 +370,19 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 					hidden3.innerHTML = Hinput[2].value;
 				}*/
 			}
-			
+
 		</script>
+<script>
+	document.getElementById('file_up').onchange = function() {
+		var imgFile = this.files[0];
+		var fr = new FileReader();
+		fr.onload = function() {
+			document.getElementById('header').src = fr.result;
+		};
+		fr.readAsDataURL(imgFile);
+		/*document.getElementById("submit1").style.display='block';*/
+	};
+</script>
 
 
 

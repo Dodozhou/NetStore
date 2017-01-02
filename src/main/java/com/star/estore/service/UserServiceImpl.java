@@ -25,9 +25,9 @@ System.out.println(emailMsg);
             //调用方法发送邮件
             MailUtils.sendMail(user.getEmail(),emailMsg);
         } catch (SQLException e) {
-            throw new RegistException("注册失败");
+            throw new RegistException("regist fail!");
         }catch (Exception e){
-            throw new RegistException("邮件发送失败");
+            throw new RegistException("Fail to send email!");
         }
     }
 
@@ -38,14 +38,14 @@ System.out.println(emailMsg);
         try {
         user= dao.findUserByUserNameAndPassword(username,password);
         if (user == null){
-            throw new LoginException("用户名或密码不正确");
+            throw new LoginException("username or password may be not correct!");
         }
         //判断用户状态
         if (user.getState() == 0){
             //用户未激活，不能进行登录操作
-            throw new LoginException("用户未激活");
+            throw new LoginException("the count havn't been actived!");
         }}catch (SQLException e){
-            throw new LoginException("登录失败");
+            throw new LoginException("login fail!");
         }
 
         return user;
@@ -58,20 +58,20 @@ System.out.println(emailMsg);
         try {
             user = dao.findUserByActiveCode(activecode);
         } catch (SQLException e) {
-            throw new RegistException("根据激活码查找用户失败");
+            throw new RegistException("Fail to find user by activecode!");
         }
 
         long time = System.currentTimeMillis()-user.getUpdatetime().getTime();
         //判断它是否超时 开发是12小时 测试1分钟
         if (time > 12*60*60*1000 ){
-            throw new ActiveUserException("激活码过期");
+            throw new ActiveUserException("active code was out of time!");
         }
 
         try {
             dao.activeUserByActiveCode(activecode);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new ActiveUserException("激活失败");
+            throw new ActiveUserException("active failed!");
         }
     }
 

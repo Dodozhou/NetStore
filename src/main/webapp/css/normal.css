@@ -36,6 +36,7 @@ body{width:100%;margin: 0;}
     .col-12 {width: 100%;}
 
 }
+
 .header{background: #fff;}
 .header .logo-img {
     display: inline-block;
@@ -123,16 +124,12 @@ body{width:100%;margin: 0;}
      width: 80%;
     display:flex;
      display: -webkit-flex;
-     justify-content: space-between;
+   justify-content: space-between;
      margin: 0 auto;
 }
 .log-box small a{
     text-decoration: none;
     cursor: pointer;
-}
-.log-box  .left_to{float: left;}
-.log-box  .right_to{
-    float: right;
 }
 .log-box small a label{color: rgba(43,76,126,0.7); }
 .log-box small a img{margin-right: 10px;vertical-align: middle;}
@@ -149,6 +146,53 @@ body{width:100%;margin: 0;}
      margin: 0;
      padding: 0;
  }
+
+ .log-box ul{
+     margin: 0;
+     padding: 0;
+     display: inline-flex;
+     list-style-type: none;
+ }
+ .log-box ul li{
+     margin: 0;
+     padding: 0;
+ }
+.log-box  .personal-img1 {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.log-box .personal a{
+    text-decoration: none;
+    color: #fff;
+}
+.log-box    .personal-img  .personal{
+ margin-left: -35px;
+    padding: 0;
+    position: absolute;
+    top:20px;
+    left: 1000em;
+    width: 100px;
+    height:150px;
+    line-height: 25px;
+    background: rgba(0,0,0,.3);
+    border: 1px solid #aaa;
+    list-style-type: none;
+
+}
+.log-box  .personal-img .personal a:hover{
+    text-decoration: underline;
+}
+.log-box  .personal-img:hover .personal{
+    left: auto;
+}
+.log-box  .personal-img:hover .personal{
+    left: auto;
+}
  .log-box small{
      color: rgba(145, 145, 145, 0.8);
  }
@@ -251,7 +295,7 @@ body{width:100%;margin: 0;}
 @media screen and  (min-width: 1200px) {
     #nav{
         height:100px;
-        padding: 0 0 0 8%;
+        padding: 0 0 0 10%;
     }
     #nav .my{
         width:3vw;
@@ -283,11 +327,10 @@ body{width:100%;margin: 0;}
     #nav ul .ul1{z-index: 2;position: absolute; }
     #nav ul .ul1 li{clear:both;list-style: none;background:rgba(86,126,187,1);border-bottom:1px solid rgba(256,256,256,0.4);width:100px;}
     #nav ul .ul1 li:hover{-moz-box-shadow: 0 0 15px rgb(20, 50, 187) inset;-webkit-box-shadow: 0 0 15px rgb(20, 50, 187) inset;box-shadow: 0 0 15px rgb(20, 50, 187) inset; }
-    #nav .my img{max-width:100%;height:auto;cursor: pointer;margin-top: 10px;}
+     .personal img{max-width:100%;height:auto;cursor: pointer;margin-top: 10px;}
 .nav{display: none;}
 }
 /*导航栏结束*/
-
 /*主题内容开始*/
 
 #main{width: 80%;margin: 0 auto;}

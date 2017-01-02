@@ -34,6 +34,26 @@ public class ProductServlet extends HttpServlet {
 				findByKey(request,response);
 		}else if ("findByOwner".equals(method)){
 			findByOwner(request,response);
+		}else if ("findByCategory".equals(method)){
+			findByCategory(request,response);
+		}
+	}
+
+	private void findByCategory(HttpServletRequest request, HttpServletResponse response) {
+		//接收客户端传递过来的类别参数
+		String cate=request.getParameter("category");
+		ProductService service= new ProductServiceImpl();
+		List<Product> pro=new LinkedList<>();
+		try {
+			pro= service.findByCate(cate);
+			if (pro.size()>0){
+				Gson gson=new Gson();
+				response.getWriter().write(gson.toJson(pro));
+			}else {
+				response.getWriter().write("不存在该类别的商品！");
+			}
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 

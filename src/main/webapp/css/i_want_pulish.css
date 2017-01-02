@@ -24,12 +24,34 @@
     margin: 20px;
 }
 .upload{
+
     text-align: center;
     cursor: pointer;
     margin:10px 0 10px;
+    position: relative;
 }
 .upload img{
     width:180px;
+    height: 180px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+
+}
+.upload span{
+    position:absolute;
+    z-index: 3;
+    left:43%;
+   bottom: 30px;
+    color: rgb(43,76,126);
+}
+@media screen and (max-device-width: 500px) {
+    .upload span{
+        position:absolute;
+        left:37%;
+        z-index: 3;
+        font-size: smaller;
+    }
 }
 .table form .span,.tishi{
     height:40px;
@@ -162,7 +184,8 @@ textarea{
         font-size: medium;
     }
     .upload img{
-        width:100px;
+        width:120px;
+        height: 120px;
     }
     .input1,.input2{
         width:90%;

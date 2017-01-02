@@ -30,4 +30,7 @@ public interface ProductService {
     List<Product> findByKey(String key) throws SQLException;
 
     List<Product> findByUser(int id) throws SQLException;
+
+    List<Product> findByCate(String cate) throws SQLException;
+
 }

@@ -1,3 +1,4 @@
+<%@ page import="com.star.estore.domain.User" %>
 <%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -9,7 +10,10 @@
     <link rel="stylesheet" type="text/css" href="css/normal.css">
     <script src="js/jquery.js?v=1.83.min" type="text/javascript"></script>
     <script src="js/load.js"></script>
+<%--
     <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+--%>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sucaijiayuan.js"></script>
@@ -34,9 +38,23 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
     <!--登录注册-->
     <div class="log-box">
 
-        <small class="left_to" ><a href="page.jsp"><img src="images/return-homepage.png"/><label >首页</label> </a></small>
-        <p>
-        <span class="right_to">
+        <small><a href="page.jsp"><img src="images/return-homepage.png"/><label >首页</label> </a></small>
+        <div>
+
+             <span class="personal-img" style="padding-top: 10px;">
+                   <img class="personal-img1" src="images/QRCode.png"/>
+                 <c:if test="${not empty user }">
+                <span class="personal" >
+                    <span> <img src="${pageContext.request.contextPath}/${user.header}" height="50%" width="50%"/></span><br/>
+                     <li> <a href="per_home.jsp"> 个人中心</a></li>
+                    <li>  <a href="per_home.jsp"> 收藏</a></li>
+                    <li>  <a href="per_home.jsp"> 消息</a></li>
+                        <li>  <a href="${pageContext.request.contextPath}/user?method=logout"> 注销</a></li>
+                </span>
+                 </c:if>
+               </span>
+
+        <span>
             <c:if test="${empty user }">
                 &nbsp;
                 <span style="color: red;" id="login_status">请登录!</span>
@@ -51,7 +69,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
             <%--<span id="login_status">未登录</span>--%>
             <span class="to_login right_to">登录</span>
             <span class="to_register right_to">注册</span>
-        </p>
+        </div>
     </div>
 
     <div  class="col-12 center header" >
@@ -218,7 +236,8 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                 <a href="#a9"  class="a"> 其他</a>
             </li>
             <li class="my" style="margin-left: 30px">
-                <img src="images/my.png"/>
+                <c:if test="${not empty user }">
+                    <img src="${pageContext.request.contextPath}/${user.header}" height="53px" width="53px" border="5px"/>
                 <ul class="ul1" >
                     <li> <a href="per_home.jsp"> 个人中心</a></li>
                     <li>  <a href="per_home.jsp"> 收藏</a></li>
@@ -227,6 +246,10 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                     <li>  <a href="${pageContext.request.contextPath}/user?method=logout"> 注销</a></li>
                     </c:if>
                 </ul>
+                </c:if>
+                <c:if test="${empty user }">
+                    <img src="images/my.png"/>
+                </c:if>
              </li>
         </ul>
     </div>
@@ -318,29 +341,24 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         </div>
 
         <div class="col-12"><h3 id="a1">校园代步</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-
-
-        <div class="col-12"><h3 id="a2">手机</h3><hr style="margin-left:0;width:45px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
+        <span id="transport"></span>
 
         <div class="col-12"><h3 id="a3">电脑</h3><hr style="margin-left:0;width:45px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-
+        <span id="computer"></span>
 
         <div class="col-12"><h3 id="a4">数码产品</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-
-
-        <div class="col-12"><h3 id="a5">数码配件</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-
+        <span id="electronics"></span>
 
         <div class="col-12"><h3 id="a6">运动健身</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
+        <span id="exercise"></span>
 
-
-        <div class="col-12"><h3 id="a7">衣物用品</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-
+        <div class="col-12"><h3 id="a7">日常用品</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
+        <span id="daily"></span>
 
         <div class="col-12"><h3 id="a8">图书教材</h3><hr style="margin-left:0;width:100px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-
+        <span id="books"></span>
         <div class="col-12"><h3 id="a9">其他</h3><hr style="margin-left:0;width:45px;margin-top:0px;border:1px solid rgb(245, 119, 46);" /></div>
-
+        <span id="other"></span>
 
     </div>
 </div>

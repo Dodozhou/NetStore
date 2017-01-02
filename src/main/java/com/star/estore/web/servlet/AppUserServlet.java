@@ -28,6 +28,7 @@ import java.util.UUID;
  */
 public class AppUserServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.setCharacterEncoding("utf-8");
         response.setContentType("application/json;charset=utf-8");
         //获取输入流中的字符串
         String str = IOUtils.toString(request.getInputStream());
@@ -107,10 +108,14 @@ public class AppUserServlet extends HttpServlet {
                     map1.put("state","2");
                     sendDetail(map1,response);
                 }else {
+                    map1.put("state", "1");
                     map1.put("nickname",user.getNickname());
                     map1.put("email",user.getEmail());
                     map1.put("username",user.getUsername());
-                    map1.put("state", "1");
+                    map1.put("phone",user.getPhone());
+                    map1.put("QQ",user.getQQ());
+                    map1.put("update_time",user.getUpdatetime().toString());
+                    map1.put("header",user.getHeader());
                     sendDetail(map1, response);
                 }
             }else {

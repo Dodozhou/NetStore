@@ -157,6 +157,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                                 <input id="text1" name="name"
                                        onclick="document.getElementById('text1').style.backgroundColor='#fff'"
                                        class="input1" type="text" size="25" placeholder="少于25字" required/>
+                                <span class="msg" style="align-items: center;">*</span>
                             </div>
                             <div id="textarea">
                                 <div class="col-3 span">
@@ -166,6 +167,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                                     <textarea id="text2" name="description"
                                               onclick="document.getElementById('text2').style.backgroundColor='#fff'"
                                               class="input1" rows="5" placeholder="商品用途、新旧程度、原价等信息" required></textarea>
+                                    <span class="msg" style="align-items: center;">*</span>
                                 </div>
                             </div>
                             <div class="col-3 span">
@@ -173,6 +175,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                             </div>
                             <div class="col-9">
                                 <input class="input2" name="category" id="datalist" list="browsers" required/>
+                                <span class="msg" style="align-items: center;">*</span>
                                 <datalist id="browsers">
                                     <option value="校园代步">
                                     <option value="手机">
@@ -192,6 +195,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                                 <input id="text3" name="dealps"
                                        onclick="document.getElementById('text3').style.backgroundColor='#fff'"
                                        class="input1" type="text" size="25" required placeholder="宿舍、教学楼、食堂、快递"/>
+                                <span class="msg" style="align-items: center;">*</span>
                             </div>
                             <div class="col-3 span">
                                 <span>期望价格</span>
@@ -200,12 +204,14 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                                 <input id="text4" name="price"
                                        onclick="document.getElementById('text4').style.backgroundColor='#fff'"
                                        class="input2" type="text" placeholder="&yen; " required/>
+                                <span class="msg" style="align-items: center;">*</span>
                             </div>
                             <div class="col-3 span">
                                 <span>联系方式</span>
                             </div>
                             <div class="col-9 tishi">
                                 <span >（至少选择一项）</span>
+                                <span class="msg" style="align-items: center;">*</span>
                             </div>
                             <div class="col-3 span">
                                 <span>QQ</span>
@@ -222,7 +228,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                                 <input type="hidden" name="phone" value="<%=u.getPhone()%>">
                             </div>
                             <div class="submit">
-                                <button type="submit">提交</button>
+                                <button type="submit" id="fabu">提交</button>
                             </div>
                         </form>
 
@@ -284,6 +290,37 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         log_box.style.display = "block";
         mask.style.display = "block";
     }
+
+
+
+    var text1= document.getElementById("text1").value;
+    var text2= document.getElementById("text2").value;
+    var text3= document.getElementById("text3").value;
+    var text5= document.getElementById("text5").value;
+    var text6= document.getElementById("text6").value;
+    var fabu=  document.getElementById("fabu");
+    fabu.onclick = function(){
+        alert("123");
+        if((text1 == null|| text1==''||text1==undefined)/* &&text2==null && text3==null && text4==null && text7==null &&(text5==null ||text6==null )*/){
+            var mag=document.getElementsByClassName("msg");
+            mag[0].style.color='red';
+            if(text2 == null|| text2==''||text2==undefined){
+                mag[1].style.color='red';
+                if(text3==null||text3==''||text3==undefined) {
+                    mag[2].style.color = 'red';
+                }
+                if ((text5 == null || text5 == '' || text5 == undefined) && (text6 == null || text6 == '' || text6 == undefined )) {
+                    mag[3].style.color = 'red';
+                }
+            }
+            fabu.disabled= true;
+        }else{
+            fabu.disabled= false;
+        }
+
+    };
+
+
 
     $(function () {
         /* 设置和说明：

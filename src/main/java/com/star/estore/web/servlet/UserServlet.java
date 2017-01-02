@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -85,16 +86,16 @@ public class UserServlet extends HttpServlet {
                 item=iterator.next();
                 //获取文件名
                 fileName=item.getName();
-                System.out.println(fileName);
+//System.out.println(fileName);
                 //分离文件名后缀，如.jpg
                 index=fileName.indexOf(".");
                 //substring 方法会返回下标为index之后的字符串
                 fileName=fileName.substring(index);
 
-                System.out.println(fileName);
+//System.out.println(fileName);
                 //使用UUID类重新生成一个随机的文件名（防止文件名重复），记住要加上文件后缀
                 fileName=UUID.randomUUID().toString()+fileName;
-                System.out.println(fileName);
+//System.out.println(fileName);
                 //多级文件存储目录，以日期划分，这样可以分流
                 SimpleDateFormat df=new SimpleDateFormat("/yyyy/MM/dd/HH");
                 String dir=df.format(new Date());
@@ -111,7 +112,7 @@ public class UserServlet extends HttpServlet {
                 }
 
                 String header="/header"+dir+"/"+fileName;
-System.out.println(header);
+//System.out.println(header);
                 //保存头像路径到数据库
                 UserDao dao=new UserDao();
                 dao.update_header(header,u.getId());
@@ -121,9 +122,11 @@ System.out.println(header);
                  * @param fileName 存储的文件名
                  */
                 item.write(new File(pathFile,fileName));
-
-
-                response.getWriter().write("恭喜你，头像上传成功！");
+                //由于用户信息有更改，所以重新查询并装填用户信息
+                User user=dao.findUserById(u.getId());
+                //request.getSession().removeAttribute("user");
+                request.getSession().setAttribute("user",user);
+                response.sendRedirect(request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+request.getContextPath()+"/per_home.jsp");
             }
             //parseRequest抛出的异常
         } catch (Exception e) {
@@ -143,7 +146,11 @@ System.out.println(header);
         map.put("id",String.valueOf(u.getId()));
         UserDao dao=new UserDao();
         if (dao.update_info(map)){
-           response.sendRedirect("/per_home.jsp");
+            //由于用户信息有更改，所以重新查询并装填用户信息
+            User user=dao.findUserById(u.getId());
+            //request.getSession().removeAttribute("user");
+            request.getSession().setAttribute("user",user);
+           response.sendRedirect(request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+request.getContextPath()+"/per_home.jsp");
         }else {
             response.getWriter().write("更改用户信息失败！");
         }

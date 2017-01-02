@@ -53,8 +53,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
     </div>
 
 <%--<span id="login_status">未登录</span>--%>
-        <span class="to_login">登录</span>
-        <span class="to_register">注册</span></p>
+
     </div>
 
     <div  class="col-12 center header" >
@@ -216,14 +215,23 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                     <li>认证状态：西南石油大学计科院15级（学号认证）</li>
                     <li>QQ：<%=p.getQQ()%></li>
                     <li>发布时间：<%=p.getUpdate_time()%></li>
+                    <li>交易地点：<%=p.getDealps()%></li>
                 </ul>
-                <form action="" method="get">
+                <form action="" method="post">
                     <span>交易方式：</span>
                     <lable><input name="style" type="radio" value="inline" id="inline"/>在线交易</lable>
                     <lable><input name="style" type="radio" value="outline" id="outline"/>线下交易</lable>
                 </form><br/>
                 <div style="height: 30px;"></div>
-                <button id="btn1">立即购买</button>
+                <button id="btn1"  onclick="pay()">立即购买</button>
+                <c:if test="${not empty user}">
+                <form method="post" action="${pageContext.request.contextPath}/fav">
+                    <input type="hidden" name="method" value="add">
+                    <input type="hidden" name="pid" value="<%=p.getId()%>">
+                    <label for="shoucang" style="cursor: pointer"><img src="images/buy.png"  width="115px" height="45px"></label>
+                    <input type="submit" id="shoucang" value="添加收藏" style="display: none">
+                </form>
+                </c:if>
                 <div style="height: 70px;"></div>
                 <img id="like"  onclick="document.getElementById('like').src='images/collect.png'" src="images/like.png"/>
                 <span>分享到：</span>
@@ -427,6 +435,8 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         outlinepay.style.display = "none";
         mask.style.display = "none";
     }
+
+
 
 </script>
 </body>

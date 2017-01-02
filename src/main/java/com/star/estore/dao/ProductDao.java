@@ -68,4 +68,10 @@ public class ProductDao {
         String sql="select * from products where owner=?";
         return runner.query(sql,new BeanListHandler<Product>(Product.class),id);
     }
+
+    public List<Product> findByCate(String cate) throws SQLException {
+        QueryRunner runner=new QueryRunner(DataSourceUtils.getDataSource());
+        String sql="select * from products where category=?";
+        return runner.query(sql,new BeanListHandler<Product>(Product.class),cate);
+    }
 }

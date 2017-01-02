@@ -114,7 +114,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
 
         <div class="basic row">
             <div class="col-3" id="head-icon">
-                <img src="images/head-icon.png" />
+                <img src="<%=u.getHeader()%>" height="150px" width="150px"/>
             </div>
             <div class="basic-infor col-9">
                 <h2><%=u.getNickname()%></h2>
@@ -154,7 +154,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                   </c:if>
                   <c:if test="${not empty pro}">
                       <c:forEach var="product" items="${pro}">
-                  <a href="${pageContext.request.contextPath}product?method=findById&id=${product.id}">
+                  <a href="${pageContext.request.contextPath}/product?method=findById&id=${product.id}">
                       <img class="shangpin_img" src="${product.imgurl}"/></a>
                       </c:forEach>
                   </c:if>

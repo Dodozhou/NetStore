@@ -8,8 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/normal.css">
     <link rel="stylesheet" type="text/css" href="css/purchase_information.css"/>
     <script src="js/jquery.js"></script><%--这句引入一定要在pur_Info_Load.js引入之前，否则下面会出错--%>
+    <script src="js/pur_info_load.js"></script>
     <script src="js/home_page.js"></script>
-    <script src="js/pur_Info_Load.js"></script>
+
 
     <title>校园二手街</title>
 </head>

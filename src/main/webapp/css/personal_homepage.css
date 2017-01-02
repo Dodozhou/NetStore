@@ -452,3 +452,59 @@ display: none;
 #homepage  .submit1{
     margin-left: 180px;
 }
+#head-icon .gengai{
+    position: relative;
+}
+#head-icon .changeimg{
+    width: 120px;
+    height:120px;
+    position: relative;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    outline: none;
+}
+#head-icon .imglogo{
+    cursor: pointer;
+    position: relative;
+}
+#head-icon  .userlogo{
+    position: absolute;
+    z-index: 2;
+    left: 18px;
+    bottom:20px;
+}
+
+#head-icon  .userlogo:hover,
+#head-icon  .userlogo:focus
+{
+    color: #428BFF;
+}
+
+@media screen  and (max-device-width:420px ) {
+    #head-icon .changeimg{
+        position: relative;
+        width: 100px;
+        height:100px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+    }
+    #head-icon  .userlogo{
+        position: absolute;
+        z-index: 2;
+        left: 10px;
+        bottom:20px;
+    }
+}
+
+.submit{position:absolute;margin-left:30px;padding:3px 10px;
+    background: #fff;color:rgba(43,76,126,.5);
+    border: 2px solid  rgba(43,76,126,.5);
+border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    outline: none;
+}
+.submit:hover,
+.submit:focus{color: rgba(43,76,126,1);}

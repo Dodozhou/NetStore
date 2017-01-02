@@ -106,9 +106,9 @@
   </servlet-mapping>
   <!--以下是手机App的接口-->
   <servlet>
+    <description>This is the Andriod user interface</description>
     <servlet-name>appUserServlet</servlet-name>
     <servlet-class>com.star.estore.web.servlet.AppUserServlet</servlet-class>
-    <description>This is the Andriod user interface</description>
   </servlet>
   <servlet-mapping>
     <servlet-name>appUserServlet</servlet-name>
@@ -123,6 +123,17 @@
     <servlet-name>PurchaseServlet</servlet-name>
     <url-pattern>/pur</url-pattern>
   </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>CollectionServlet</servlet-name>
+    <servlet-class>com.star.estore.web.servlet.FavoriteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CollectionServlet</servlet-name>
+    <url-pattern>/fav</url-pattern>
+  </servlet-mapping>
+
 
   <welcome-file-list>
     <welcome-file>page.jsp</welcome-file>

@@ -155,8 +155,11 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         </c:if>
                         <div class="col-12 upload">
                             <%--实现效果：点击图片出现file选择框--%>
-                            <label for="file_up" style="cursor: pointer"><img id="up_img" src="images/upload.png"/></label>
-                            <input type="file" name="img" id="file_up"  style="display: none;">
+                            <label for="file_up" style="cursor: pointer">
+                                <img id="up_img" src="images/upload.png"/>
+                                <span>点击添加图片</span>
+                            </label>
+                            <input type="file" name="img" id="file_up"  style="display: none;" required>
                             <%--效果结束--%>
                         </div>
                         <div class="col-3 span">
@@ -165,6 +168,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <div class="col-9">
                             <input id="text1" name="name" onclick="document.getElementById('text1').style.backgroundColor='#fff'"
                                    class="input1" type="text" size="25" placeholder="少于25字" required/>
+                            <span class="msg">*</span>
                         </div>
                     <div id="textarea">
                         <div class="col-3 span">
@@ -173,6 +177,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <div class="col-9">
                             <textarea id="text2" name="description" onclick="document.getElementById('text2').style.backgroundColor='#fff'"
                                       class="input1" rows="5" placeholder="商品用途、新旧程度、原价等信息" required></textarea>
+                            <span class="msg">*</span>
                         </div>
                     </div>
                         <div class="col-3 span">
@@ -181,29 +186,30 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <div class="col-9">
                             <input  id="text3" name="dealps" onclick="document.getElementById('text3').style.backgroundColor='#fff'"
                                     class="input1" type="text" size="25" required placeholder="宿舍、教学楼、食堂、快递"/>
+                            <span class="msg">*</span>
                         </div>
                         <div class="col-3 span">
                             <span>价格</span>
                         </div>
                         <div class="col-9">
                             <input  id="text4" name="price" onclick="document.getElementById('text4').style.backgroundColor='#fff'" class="input2" type="text"  placeholder="&yen; " required/>
+                            <span class="msg">*</span>
                         </div>
                         <div class="col-3 span">
                             <span>分类</span>
                         </div>
                         <div class="col-9">
-                            <input class="input2" name="category" id="datalist" list="browsers" required/>
-                            <datalist id="browsers">
-                                <option value="校园代步">
-                                <option value="手机">
-                                <option value="电脑">
-                                <option value="数码产品">
-                                <option value="数码配件">
-                                <option value="运动健身">
-                                <option value="衣物用品">
-                                <option value="图书素材">
-                                <option value="其他">
-                            </datalist>
+                            <%--<input class="input2" name="category" id="datalist" list="browsers" required/>--%>
+                            <span class="msg">*</span>
+                            <select id="browsers" name="category" class="input2">
+                                <option value="transport">校园代步</option>
+                                <option value="computer">电脑</option>
+                                <option value="electronics">数码产品</option>
+                                <option value="exercise">运动健身</option>
+                                <option value="daily">衣物用品</option>
+                                <option value="books">图书素材</option>
+                                <option value="other">其他</option>
+                            </select>
                         </div>
                         <div class="col-3 span">
                             <span>讲价</span>
@@ -224,6 +230,7 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <div class="col-9">
                             <span style="vertical-align:center"><%=u.getQQ()%></span>
                             <input type="hidden" name="QQ" value="<%=u.getQQ()%>">
+                            <span class="msg">*</span>
                         </div>
                         <div class="col-3 span">
                             <span>手机号</span>
@@ -231,15 +238,17 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
                         <div class="col-9">
                             <span><%=u.getPhone()%></span>
                             <input type="hidden"  name="phone" value="<%=u.getPhone()%>">
+                            <span class="msg">*</span>
                         </div>
                         <div class="col-3 span radio" style="text-align: right">
                             <input  type="radio" />
                         </div>
                         <div class="col-9 rule">
                             <span>我同意<a href="#">商品发布规则</a></span>
+                            <span class="msg">*</span>
                         </div>
                         <div class="submit">
-                            <button type="submit" value="agree">发布</button>
+                            <button type="submit" value="agree" id="fabu">发布</button>
                         </div>
                     </form>
 
@@ -302,6 +311,45 @@ background: linear-gradient(left,rgba(218, 239, 247,.5), rgba(228, 225, 247,.5))
         log_box.style.display = "block";
         mask.style.display = "block";
     }
+
+
+
+    var text1= document.getElementById("text1").value;
+    var text2= document.getElementById("text2").value;
+    var text3= document.getElementById("text3").value;
+    var text4= document.getElementById("text4").value;
+    var text5= document.getElementById("text5").value;
+    var text6= document.getElementById("text6").value;
+    var text7= document.getElementById("datalist").value;
+    var fabu=  document.getElementById("fabu");
+    fabu.onclick = function(){
+        if((text1 == null|| text1==''||text1==undefined)/* &&text2==null && text3==null && text4==null && text7==null &&(text5==null ||text6==null )*/){
+            var mag=document.getElementsByClassName("msg");
+            mag[0].style.color='red';
+            if(text2 == null|| text2==''||text2==undefined){
+                mag[1].style.color='red';
+                if(text3==null||text3==''||text3==undefined) {
+                    mag[2].style.color = 'red';
+                    if (text4 == null || text4 == '' || text4 == undefined) {
+                        mag[3].style.color = 'red';
+                        if (text7 == null || text7 == '' || text7 == undefined) {
+                            mag[4].style.color = 'red';
+                            if ((text5 == null || text5 == '' || text5 == undefined) && (text6 == null || text6 == '' || text6 == undefined )) {
+                                mag[5].style.color = 'red';
+                                mag[6].style.color = 'red';
+                            }
+                        }
+                    }
+                }
+            }
+
+            fabu.disabled= true;
+
+        }else{
+            fabu.disabled= false;
+        }
+
+    };
 
 
     //alert($);//弹出jq的代理函数$
